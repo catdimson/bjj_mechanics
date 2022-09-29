@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BjjMechanics</string>
+    <string name="page_term">Термины</string>
+    <string name="page_sections">Секции</string>
+    <string name="page_education">Обучение</string>
+    <string name="page_workout">Тренировка</string>
+    <string name="page_registration">Войти</string>
 </resources>
