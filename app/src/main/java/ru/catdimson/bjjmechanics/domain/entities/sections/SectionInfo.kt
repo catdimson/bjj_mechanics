@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.domain.entities.section
+package ru.catdimson.bjjmechanics.domain.entities.sections
 
 import ru.catdimson.bjjmechanics.domain.entities.general.Address
 import ru.catdimson.bjjmechanics.domain.entities.general.Contact

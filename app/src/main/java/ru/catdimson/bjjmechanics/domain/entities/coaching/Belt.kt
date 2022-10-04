@@ -4,5 +4,5 @@ data class Belt(
     val id: Int,
     val color: String,
     val stripes: Int?,
-    val beltPicture: String
+    val beltPictureUrl: String
 )

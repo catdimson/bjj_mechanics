@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import ru.catdimson.bjjmechanics.databinding.ItemSectionsBinding
-import ru.catdimson.bjjmechanics.domain.entities.section.SectionInfo
+import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 
 class SectionsViewHolder(
     private val binding: ItemSectionsBinding
