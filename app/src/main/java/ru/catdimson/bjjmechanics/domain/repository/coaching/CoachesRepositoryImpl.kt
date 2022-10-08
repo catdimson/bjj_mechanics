@@ -1,13 +1,17 @@
 package ru.catdimson.bjjmechanics.domain.repository.coaching
 
+import ru.catdimson.bjjmechanics.domain.datasource.DataSource
 import ru.catdimson.bjjmechanics.domain.entities.coaching.Coach
 
-class CoachesRepositoryImpl : CoachesRepository {
+class CoachesRepositoryImpl(
+    private val dataSource: DataSource
+) : CoachesRepository {
+
     override suspend fun findBySection(id: Int): List<Coach> {
-        TODO("Not yet implemented")
+        return dataSource.findCoachesBySection(id)
     }
 
     override suspend fun findById(id: Int): Coach {
-        TODO("Not yet implemented")
+        return dataSource.findCoachById(id)
     }
 }

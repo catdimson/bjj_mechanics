@@ -1,4 +1,8 @@
 package ru.catdimson.bjjmechanics.viewmodel.sections
 
-class SectionsViewModel {
+import ru.catdimson.bjjmechanics.domain.datasource.interactor.sections.SectionsInteractor
+
+class SectionsViewModel(
+    private val interactor: SectionsInteractor
+) {
 }

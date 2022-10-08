@@ -10,7 +10,10 @@ interface ApiService {
 
     // Sections
     @GET("sections")
-    fun findSectionsByTown(town: String): Deferred<List<SectionInfo>>
+    fun findSectionsByTitle(title: String): Deferred<List<SectionInfo>>
+
+    @GET("sections")
+    fun findSectionsByCity(city: String): Deferred<List<SectionInfo>>
 
     @GET("sections/{id}")
     fun findSectionById(@Path("id") id: Int): Deferred<SectionInfo>

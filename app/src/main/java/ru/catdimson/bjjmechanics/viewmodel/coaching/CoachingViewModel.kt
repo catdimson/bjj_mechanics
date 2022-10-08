@@ -1,4 +1,8 @@
 package ru.catdimson.bjjmechanics.viewmodel.coaching
 
-class CoachingViewModel {
+import ru.catdimson.bjjmechanics.domain.datasource.interactor.coaching.CoachesInteractor
+
+class CoachingViewModel(
+    private val interactor: CoachesInteractor
+) {
 }
