@@ -26,15 +26,19 @@ class RetrofitImpl : DataSource {
         private const val BASE_API_URL = "https://dictionary.skyeng.ru/api/public/v1/"
     }
 
-    override suspend fun findSectionsByTown(town: String): List<SectionInfo> {
-        return getService().findSectionsByTown(town).await()
+    override suspend fun findSectionsByTitle(title: String): List<SectionInfo> {
+        return getService().findSectionsByTitle(title).await()
+    }
+
+    override suspend fun findSectionsByCity(city: String): List<SectionInfo> {
+        return getService().findSectionsByCity(city).await()
     }
 
     override suspend fun findSectionById(id: Int): SectionInfo {
         return getService().findSectionById(id).await()
     }
 
-    override suspend fun findCoachesBySectionId(id: Int): List<Coach> {
+    override suspend fun findCoachesBySection(id: Int): List<Coach> {
         return getService().findCoachesBySectionId(id).await()
     }
 

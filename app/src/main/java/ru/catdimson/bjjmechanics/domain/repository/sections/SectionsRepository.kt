@@ -8,7 +8,9 @@ import ru.catdimson.bjjmechanics.domain.repository.Repository
  * */
 interface SectionsRepository : Repository {
 
-    suspend fun findByTown(town: String): List<SectionInfo>
+    suspend fun findByTitle(title: String): List<SectionInfo>
+
+    suspend fun findByCity(city: String): List<SectionInfo>
 
     suspend fun findById(id: Int): SectionInfo
 
