@@ -39,7 +39,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     private fun initBottomNavigationMenu() {
-        binding.menuBnv.setOnItemSelectedListener {
+        binding.menuBottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item1 -> {
                     navigationTo(SectionsFragment.newInstance())
@@ -57,7 +57,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                     navigationTo(SectionsFragment.newInstance())
                     true
                 }
-                R.id.menu_item5 -> {
+                R.id.menu_item_sections -> {
                     navigationTo(SectionsFragment.newInstance())
                     true
                 }

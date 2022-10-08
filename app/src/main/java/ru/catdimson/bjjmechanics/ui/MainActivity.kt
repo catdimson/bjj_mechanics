@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_wrapper, MainFragment.newInstance())
+                .replace(R.id.main_container, MainFragment.newInstance())
                 .commit()
         }
     }

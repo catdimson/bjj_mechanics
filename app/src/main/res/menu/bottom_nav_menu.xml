@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_space_mars_photo_alien"
         app:tooltipText="tooltip_menu_item3"
         android:enabled="true"
-        android:title="@string/page_workout" />
+        android:title="@string/page_training" />
 
     <item
         android:id="@+id/menu_item4"
@@ -31,10 +31,10 @@
         android:title="@string/page_sections" />
 
     <item
-        android:id="@+id/menu_item5"
+        android:id="@+id/menu_item_sections"
         android:icon="@drawable/ic_space_mars_photo_alien"
         app:tooltipText="tooltip_menu_item5"
         android:enabled="true"
-        android:title="@string/page_term" />
+        android:title="@string/page_terms" />
 
 </menu>
