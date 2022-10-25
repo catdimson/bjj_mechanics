@@ -17,14 +17,14 @@
         android:title="@string/page_registration" />
 
     <item
-        android:id="@+id/menu_item3"
+        android:id="@+id/menu_item77"
         android:icon="@drawable/ic_space_mars_photo_alien"
         app:tooltipText="tooltip_menu_item3"
         android:enabled="true"
         android:title="@string/page_training" />
 
     <item
-        android:id="@+id/menu_item4"
+        android:id="@+id/menu_item88"
         android:icon="@drawable/ic_space_mars_photo_alien"
         app:tooltipText="tooltip_menu_item4"
         android:enabled="true"
