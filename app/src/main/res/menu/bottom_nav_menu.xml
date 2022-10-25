@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_item1"
+        android:id="@+id/menu_item6"
         android:icon="@drawable/ic_space_mars_photo_alien"
         app:tooltipText="tooltip_menu_item1"
         android:enabled="true"
