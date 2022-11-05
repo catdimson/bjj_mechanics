@@ -1,7 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.entities.general
 
-data class Address(
+data class City(
     val id: Int,
-    val location: String,
-    val city: City
+    val title: String
 )

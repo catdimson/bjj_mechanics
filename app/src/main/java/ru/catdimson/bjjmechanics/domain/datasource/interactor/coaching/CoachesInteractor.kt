@@ -1,6 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.datasource.interactor.coaching
 
-import ru.catdimson.bjjmechanics.domain.entities.coaching.Coach
+import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 
 interface CoachesInteractor {
 

@@ -3,7 +3,7 @@ package ru.catdimson.bjjmechanics.domain.datasource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.catdimson.bjjmechanics.domain.entities.coaching.Coach
+import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 
 class RetrofitImpl : DataSource {
@@ -23,7 +23,7 @@ class RetrofitImpl : DataSource {
     }
 
     companion object {
-        private const val BASE_API_URL = "https://dictionary.skyeng.ru/api/public/v1/"
+        private const val BASE_API_URL = "http://45.144.2.195:8080/api/v1/"
     }
 
     override suspend fun findSectionsByTitle(title: String): List<SectionInfo> {
