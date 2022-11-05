@@ -12,7 +12,7 @@ import ru.catdimson.bjjmechanics.domain.repository.coaching.CoachesRepository
 import ru.catdimson.bjjmechanics.domain.repository.coaching.CoachesRepositoryImpl
 import ru.catdimson.bjjmechanics.domain.repository.sections.SectionsRepository
 import ru.catdimson.bjjmechanics.domain.repository.sections.SectionsRepositoryImpl
-import ru.catdimson.bjjmechanics.viewmodel.coaching.CoachingViewModel
+import ru.catdimson.bjjmechanics.viewmodel.sections.SectionDetailsViewModel
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
 
 val generals = module {
@@ -27,11 +27,11 @@ val sectionsScreen = module {
     }
 }
 
-val coachingScreen = module {
-    scope(named("coachingScope")) {
-        scoped<CoachesRepository> { CoachesRepositoryImpl(dataSource = get()) }
-        scoped<CoachesInteractor> { CoachesInteractorImpl(repository = get()) }
-        factory { CoachingViewModel(interactor = get()) }
+val sectionDetailsScreen = module {
+    scope(named("sectionDetailsScope")) {
+        scoped<SectionsRepository> { SectionsRepositoryImpl(dataSource = get()) }
+        scoped<SectionsInteractor> { SectionsInteractorImpl(repository = get()) }
+        factory { SectionDetailsViewModel(interactor = get()) }
     }
 }
 
