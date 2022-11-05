@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.domain.entities.coaching
+package ru.catdimson.bjjmechanics.domain.entities.sections
 
 data class Belt(
     val id: Int,

@@ -1,8 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.entities.sections
 
 import ru.catdimson.bjjmechanics.domain.entities.general.Address
-import ru.catdimson.bjjmechanics.domain.entities.general.Contact
-import ru.catdimson.bjjmechanics.domain.entities.coaching.Coach
 
 data class SectionInfo(
     val id: Int,
@@ -15,10 +13,6 @@ data class SectionInfo(
     val imageUrl: String,
 
     val address: Address,
-    val contacts: List<Contact>,
-    val coachCollection: List<Coach>,
-    val isActive: Boolean,
-
-    val createDate: String,
-    val editDate: String
+    val coaches: List<Coach>,
+    val isActive: Boolean
 )

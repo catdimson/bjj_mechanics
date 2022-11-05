@@ -1,7 +1,7 @@
 package ru.catdimson.bjjmechanics.domain.repository.coaching
 
 import ru.catdimson.bjjmechanics.domain.datasource.DataSource
-import ru.catdimson.bjjmechanics.domain.entities.coaching.Coach
+import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 
 class CoachesRepositoryImpl(
     private val dataSource: DataSource

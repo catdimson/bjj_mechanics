@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.domain.entities.general
+package ru.catdimson.bjjmechanics.domain.entities.system
 
 data class Person(
     val id: Int,
