@@ -49,10 +49,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                     navigationTo(SectionsFragment.newInstance())
                     true
                 }
-                R.id.menu_item3 -> {
-                    navigationTo(SectionsFragment.newInstance())
-                    true
-                }
+//                R.id.menu_item3 -> {
+//                    navigationTo(SectionsFragment.newInstance())
+//                    true
+//                }
                 R.id.menu_item4 -> {
                     navigationTo(SectionsFragment.newInstance())
                     true

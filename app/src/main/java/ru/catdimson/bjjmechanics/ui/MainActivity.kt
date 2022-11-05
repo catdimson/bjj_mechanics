@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startRoot(savedInstanceState)
+        startRootFragment(savedInstanceState)
     }
 
-    private fun startRoot(savedInstanceState: Bundle?) {
+    private fun startRootFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()

@@ -18,12 +18,16 @@ class SectionsViewHolder(
         }
     }
 
-    fun bind(item: SectionInfo) {
+    fun bind(item: SectionInfo, onItemClickListener: SectionsAdapter.OnListItemClickListener) {
         binding.apply {
             sectionPreview.load(item.previewUrl)
-            sectionTitle.text = item.title
-            sectionDescription.text = item.shortDescription
+            title.text = item.title
+            address.text = item.address.location
+            contacts.text = item.contacts.toString()
+            shortDescription.text = item.shortDescription
+        }
+        binding.root.setOnClickListener {
+            onItemClickListener.onItemClick(item)
         }
     }
-
 }

@@ -7,6 +7,7 @@ class DataSourceImpl(
     private val provider: RetrofitImpl
 ) : DataSource {
 
+    // sections
     override suspend fun findSectionsByTitle(title: String): List<SectionInfo> {
         return provider.findSectionsByTitle(title)
     }
@@ -19,6 +20,7 @@ class DataSourceImpl(
         return provider.findSectionById(id)
     }
 
+    // coaches
     override suspend fun findCoachesBySection(id: Int): List<Coach> {
         return provider.findCoachesBySection(id)
     }
