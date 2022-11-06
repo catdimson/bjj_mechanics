@@ -9,6 +9,7 @@ import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.databinding.FragmentMainBinding
 import ru.catdimson.bjjmechanics.ui.BaseFragment
 import ru.catdimson.bjjmechanics.ui.sections.SectionsFragment
+import ru.catdimson.bjjmechanics.ui.terms.TermsFragment
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
@@ -53,8 +54,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 //                    navigationTo(SectionsFragment.newInstance())
 //                    true
 //                }
-                R.id.menu_item4 -> {
-                    navigationTo(SectionsFragment.newInstance())
+                R.id.menu_item_terms -> {
+                    navigationTo(TermsFragment.newInstance())
                     true
                 }
                 R.id.menu_item_sections -> {
