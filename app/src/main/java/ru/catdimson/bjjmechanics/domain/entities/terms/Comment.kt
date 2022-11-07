@@ -1,9 +1,11 @@
 package ru.catdimson.bjjmechanics.domain.entities.terms
 
 import ru.catdimson.bjjmechanics.domain.entities.system.User
+import java.time.LocalDate
 
 data class Comment(
     val id: Int,
     val text: String,
-    val user: User
+    val user: User,
+    val createDate: LocalDate
 )
