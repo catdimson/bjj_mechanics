@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import ru.catdimson.bjjmechanics.R
+import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentSectionsBinding
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
+import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.ui.BaseFragment
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
 
-class SectionsFragment : BaseFragment<FragmentSectionsBinding>(FragmentSectionsBinding::inflate) {
+class SectionsFragment : AbstractScreenFragment<FragmentSectionsBinding>(FragmentSectionsBinding::inflate) {
 
     private lateinit var viewModel: SectionsViewModel
-    private val scope by lazy { getKoin().getOrCreateScope("sectionsScope", named("sectionsScope")) }
+    private var scope = getKoin().getOrCreateScope("sectionsScope", named("sectionsScope"))
     private val adapter by lazy { SectionsAdapter(onListItemClickListener) }
 
     private val onListItemClickListener: SectionsAdapter.OnListItemClickListener =
@@ -41,5 +43,9 @@ class SectionsFragment : BaseFragment<FragmentSectionsBinding>(FragmentSectionsB
         super.onCreateView(inflater, container, savedInstanceState)
 
         return binding.root
+    }
+
+    override fun renderData(appState: AppState) {
+        TODO("Not yet implemented")
     }
 }

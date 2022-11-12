@@ -9,8 +9,6 @@ abstract class BaseViewModel<T : AppState>(
     protected open val liveData: MutableLiveData<T> = MutableLiveData()
 ) : ViewModel() {
 
-    abstract fun getData(word: String, isOnline: Boolean)
-
     protected val viewModelCoroutineScope = CoroutineScope(
         Dispatchers.Main
                 + SupervisorJob()

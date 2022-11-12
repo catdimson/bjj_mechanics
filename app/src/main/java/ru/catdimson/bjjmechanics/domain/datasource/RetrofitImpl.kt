@@ -1,10 +1,12 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
+import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 class RetrofitImpl : DataSource {
 
@@ -23,7 +25,7 @@ class RetrofitImpl : DataSource {
     }
 
     companion object {
-        private const val BASE_API_URL = "http://45.144.2.195:8080/api/v1/"
+        private const val BASE_API_URL = "http://45.144.2.195:8080/"
     }
 
     override suspend fun findSectionsByTitle(title: String): List<SectionInfo> {
@@ -44,5 +46,13 @@ class RetrofitImpl : DataSource {
 
     override suspend fun findCoachById(id: Int): Coach {
         return getService().findCoachById(id).await()
+    }
+
+    override suspend fun findAllTerms(authMap: Map<String, String>): List<Term> {
+        return getService().findAllTerms(authMap).await()
+    }
+
+    override suspend fun findTermById(id: Int): Term {
+        return getService().findTermById(id).await()
     }
 }

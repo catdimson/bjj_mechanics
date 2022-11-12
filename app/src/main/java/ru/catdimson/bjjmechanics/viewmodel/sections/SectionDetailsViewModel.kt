@@ -7,12 +7,8 @@ import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
 class SectionDetailsViewModel(
     private val interactor: SectionsInteractor
 ): BaseViewModel<AppState>() {
-    override fun getData(word: String, isOnline: Boolean) {
-        TODO("Not yet implemented")
-    }
 
     override fun handleError(error: Throwable) {
         TODO("Not yet implemented")
     }
-
 }

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import org.koin.core.scope.Scope
+import ru.catdimson.bjjmechanics.data.AppState
 
 abstract class BaseFragment<T : ViewBinding>(
     private val inflate: (inflater: LayoutInflater, parent: ViewGroup?, attachToRoot: Boolean) -> T

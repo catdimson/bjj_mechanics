@@ -18,11 +18,11 @@ class SectionsViewModel(
         return liveDataForViewToObserve
     }
 
-    override fun getData(word: String, isOnline: Boolean) {
+    fun getData(section: String, isOnline: Boolean) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            startInteractor(word, isOnline)
+            startInteractor(section, isOnline)
         }
     }
 
