@@ -24,7 +24,7 @@ import java.util.*
 class TermsFragment : AbstractScreenFragment<FragmentTermsBinding>(FragmentTermsBinding::inflate) {
 
     private lateinit var viewModel: TermsViewModel
-    private var scope = getKoin().getOrCreateScope("termsScope", named("termsScope"))
+    override var scope = getKoin().getOrCreateScope("termsScope", named("termsScope"))
     private val adapter by lazy { TermsAdapter(onListItemClickListener) }
     private val authMap = mapOf(
         Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
@@ -34,7 +34,7 @@ class TermsFragment : AbstractScreenFragment<FragmentTermsBinding>(FragmentTerms
         object : TermsAdapter.OnListItemClickListener {
             override fun onItemClick(data: Term) {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.container, TermsDetailFragment.newInstance())
+                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
                     .addToBackStack(null)
                     .commit()
             }

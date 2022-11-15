@@ -17,7 +17,7 @@ import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
 class SectionsFragment : AbstractScreenFragment<FragmentSectionsBinding>(FragmentSectionsBinding::inflate) {
 
     private lateinit var viewModel: SectionsViewModel
-    private var scope = getKoin().getOrCreateScope("sectionsScope", named("sectionsScope"))
+    override var scope = getKoin().getOrCreateScope("sectionsScope", named("sectionsScope"))
     private val adapter by lazy { SectionsAdapter(onListItemClickListener) }
 
     private val onListItemClickListener: SectionsAdapter.OnListItemClickListener =

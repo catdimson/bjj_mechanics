@@ -6,6 +6,6 @@ interface TermsInteractor {
 
     suspend fun findAll(authMap: Map<String, String>): List<Term>
 
-    suspend fun findById(id: Int): Term
+    suspend fun findById(id: Int, authMap: Map<String, String>): Term
 
 }

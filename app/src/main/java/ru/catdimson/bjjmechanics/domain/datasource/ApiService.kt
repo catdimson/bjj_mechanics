@@ -29,9 +29,14 @@ interface ApiService {
 
     // Terms
     @GET("term")
-    fun findAllTerms(@HeaderMap authMap: Map<String, String>): Deferred<List<Term>>
+    fun findAllTerms(
+        @HeaderMap authMap: Map<String, String>
+    ): Deferred<List<Term>>
 
     @GET("term/{id}")
-    fun findTermById(@Path("id") id: Int): Deferred<Term>
+    fun findTermById(
+        @HeaderMap authMap: Map<String, String>,
+        @Path("id") id: Int
+    ): Deferred<Term>
 
 }

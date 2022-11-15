@@ -21,6 +21,6 @@ interface DataSource {
     // terms
     suspend fun findAllTerms(authMap: Map<String, String>): List<Term>
 
-    suspend fun findTermById(id: Int): Term
+    suspend fun findTermById(id: Int, authMap: Map<String, String>): Term
 
 }

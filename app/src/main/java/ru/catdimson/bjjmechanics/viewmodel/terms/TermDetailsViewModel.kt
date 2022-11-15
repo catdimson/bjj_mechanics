@@ -8,7 +8,7 @@ import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractor
 import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
 
-class TermsViewModel(
+class TermDetailsViewModel(
     private val interactor: TermsInteractor
 ) : BaseViewModel<AppState>() {
 
@@ -18,17 +18,17 @@ class TermsViewModel(
         return liveDataForViewToObserve
     }
 
-    fun onShowAllTerms(authMap: Map<String, String>) {
+    fun onShowTermById(id: Int, authMap: Map<String, String>) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            getAllTerms(authMap)
+            getTermById(id, authMap)
         }
     }
 
-    private suspend fun getAllTerms(authMap: Map<String, String>) {
+    private suspend fun getTermById(id: Int, authMap: Map<String, String>) {
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessTerms(interactor.findAll(authMap)))
+            liveData.postValue(AppState.SuccessTermDetail(interactor.findById(id, authMap)))
         }
     }
 

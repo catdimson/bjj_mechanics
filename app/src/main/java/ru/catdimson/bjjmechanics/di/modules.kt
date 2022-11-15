@@ -18,6 +18,7 @@ import ru.catdimson.bjjmechanics.domain.repository.terms.TermsRepository
 import ru.catdimson.bjjmechanics.domain.repository.terms.TermsRepositoryImpl
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionDetailsViewModel
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
+import ru.catdimson.bjjmechanics.viewmodel.terms.TermDetailsViewModel
 import ru.catdimson.bjjmechanics.viewmodel.terms.TermsViewModel
 
 val generals = module {
@@ -45,6 +46,14 @@ val termsScreen = module {
         scoped<TermsRepository> { TermsRepositoryImpl(dataSource = get()) }
         scoped<TermsInteractor> { TermsInteractorImpl(repository = get()) }
         factory { TermsViewModel(interactor = get()) }
+    }
+}
+
+val termDetailsScreen = module {
+    scope(named("termDetailsScope")) {
+        scoped<TermsRepository> { TermsRepositoryImpl(dataSource = get()) }
+        scoped<TermsInteractor> { TermsInteractorImpl(repository = get()) }
+        factory { TermDetailsViewModel(interactor = get()) }
     }
 }
 

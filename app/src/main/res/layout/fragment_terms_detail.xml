@@ -21,14 +21,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Кимура (Kimura)" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/video"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:autoPlay="false"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            app:srcCompat="@drawable/ic_no_photo_vector" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name" />
 
         <TextView
             android:id="@+id/term_type"
@@ -51,26 +52,17 @@
             tools:text="Описание приема. Описание приема. Описание приема.
 Описание приема. Описание приема. Описание приема. Описание приема. Описание приема. Описание приема. " />
 
-        <FrameLayout
-            android:id="@+id/success_comments_load_wrapper"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comments_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/comments_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        </FrameLayout>
-
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/loading_layout" />
+    <include android:id="@+id/loading" layout="@layout/loading_layout" />
 
 </FrameLayout>

@@ -3,10 +3,7 @@ package ru.catdimson.bjjmechanics
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import ru.catdimson.bjjmechanics.di.generals
-import ru.catdimson.bjjmechanics.di.sectionDetailsScreen
-import ru.catdimson.bjjmechanics.di.sectionsScreen
-import ru.catdimson.bjjmechanics.di.termsScreen
+import ru.catdimson.bjjmechanics.di.*
 
 class App : Application() {
 
@@ -20,7 +17,8 @@ class App : Application() {
                 sectionsScreen,
                 sectionDetailsScreen,
 
-                termsScreen
+                termsScreen,
+                termDetailsScreen
             )
         }
     }
