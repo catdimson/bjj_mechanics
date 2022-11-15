@@ -6,6 +6,7 @@ import org.koin.core.context.startKoin
 import ru.catdimson.bjjmechanics.di.generals
 import ru.catdimson.bjjmechanics.di.sectionDetailsScreen
 import ru.catdimson.bjjmechanics.di.sectionsScreen
+import ru.catdimson.bjjmechanics.di.termsScreen
 
 class App : Application() {
 
@@ -17,7 +18,9 @@ class App : Application() {
                 generals,
 
                 sectionsScreen,
-                sectionDetailsScreen
+                sectionDetailsScreen,
+
+                termsScreen
             )
         }
     }
