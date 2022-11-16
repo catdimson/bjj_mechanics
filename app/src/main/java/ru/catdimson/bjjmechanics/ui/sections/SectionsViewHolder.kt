@@ -14,16 +14,16 @@ class SectionsViewHolder(
     companion object {
         fun create(parent: ViewGroup) : SectionsViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            return SectionsViewHolder(ItemSectionsBinding.inflate(inflater))
+            return SectionsViewHolder(ItemSectionsBinding.inflate(inflater, parent, false))
         }
     }
 
     fun bind(item: SectionInfo, onItemClickListener: SectionsAdapter.OnListItemClickListener) {
         binding.apply {
-            sectionPreview.load(item.previewUrl)
+            sectionPreview.load("https://i.pinimg.com/originals/e3/7b/ab/e37bab9df8343b528cc3a90abf507c7b.jpg"/*item.previewUrl*/)
             title.text = item.title
             address.text = item.address.location
-            contacts.text = item.contacts.toString()
+            contacts.text = if (item.contacts.isNullOrEmpty()) "Пока пусто" else item.contacts[0].toString()
             shortDescription.text = item.shortDescription
         }
         binding.root.setOnClickListener {

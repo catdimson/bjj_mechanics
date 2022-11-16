@@ -7,11 +7,11 @@ import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 interface DataSource {
 
     // sections
-    suspend fun findSectionsByTitle(title: String): List<SectionInfo>
+    suspend fun findSectionsByTitle(title: String, authMap: Map<String, String>): List<SectionInfo>
 
-    suspend fun findSectionsByCity(city: String): List<SectionInfo>
+    suspend fun findSectionsByCity(city: String, authMap: Map<String, String>): List<SectionInfo>
 
-    suspend fun findSectionById(id: Int): SectionInfo
+    suspend fun findSectionById(id: Int, authMap: Map<String, String>): SectionInfo
 
     // coaches
     suspend fun findCoachesBySection(id: Int): List<Coach>

@@ -149,7 +149,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                             "Пользователь",
                             "Рядовой юзер"
                         ),
-                        true,
+                        1,
                         Person(
                             i,
                             "Иван " + i,

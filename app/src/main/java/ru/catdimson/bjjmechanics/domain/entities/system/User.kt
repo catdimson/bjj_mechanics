@@ -5,6 +5,6 @@ data class User(
     val login: String,
     val password: String,
     val role: Role,
-    val isActive: Boolean,
+    val isActive: Int,
     val person: Person
 )

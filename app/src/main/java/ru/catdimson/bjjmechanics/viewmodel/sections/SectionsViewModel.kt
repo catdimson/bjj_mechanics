@@ -18,20 +18,17 @@ class SectionsViewModel(
         return liveDataForViewToObserve
     }
 
-    fun getData(section: String, isOnline: Boolean) {
+    fun onShowSectionsByCity(city: String, authMap: Map<String, String>) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            startInteractor(section, isOnline)
+            getSectionsByCity(city, authMap)
         }
     }
 
-    private suspend fun startInteractor(
-        word: String = "Белгород",
-        isOnline: Boolean = true
-    ) {
+    private suspend fun getSectionsByCity(city: String, authMap: Map<String, String>) {
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessSections(interactor.findByCity(word)))
+            liveData.postValue(AppState.SuccessSections(interactor.findByCity(city, authMap)))
         }
     }
 
@@ -40,7 +37,7 @@ class SectionsViewModel(
     }
 
     override fun onCleared() {
-        liveData.value = AppState.SuccessSections(null)
+        liveData.value = null
         super.onCleared()
     }
 }
