@@ -127,13 +127,13 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
     }
 
     private fun setDataToScreen(term: Term?) {
+        showVideo(extractYoutubeId(term?.video?.url!!))
         binding.apply {
             name.text = term?.name
             termType.text = term?.termType?.title
             description.text = term?.description
             commentsRecyclerView.adapter = adapter
         }
-        showVideo(extractYoutubeId(term?.video?.url!!))
     }
 
     private fun initFakeAdapter() {

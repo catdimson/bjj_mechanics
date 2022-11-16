@@ -8,10 +8,9 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="?actionBarSize"/>
+        android:layout_marginBottom="?actionBarSize"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom_navigation_view"
