@@ -4,9 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 
-class CommentAdapter(
-    private val onListItemClickListener: OnListItemClickListener
-) : RecyclerView.Adapter<CommentViewHolder>() {
+class CommentAdapter() : RecyclerView.Adapter<CommentViewHolder>() {
 
     private var data: List<Comment> = arrayListOf()
 
@@ -20,7 +18,7 @@ class CommentAdapter(
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        holder.bind(getItem(position), onListItemClickListener)
+        holder.bind(getItem(position))
     }
 
     override fun getItemCount(): Int {

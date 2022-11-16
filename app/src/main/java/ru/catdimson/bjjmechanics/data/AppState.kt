@@ -9,7 +9,7 @@ sealed class AppState {
 
     data class SuccessTerms(val data: List<Term>) : AppState()
 
-    data class SuccessTerm(val data: Term) : AppState()
+    data class SuccessTermDetail(val data: Term?) : AppState()
 
     data class Error(val error: Throwable) : AppState()
 

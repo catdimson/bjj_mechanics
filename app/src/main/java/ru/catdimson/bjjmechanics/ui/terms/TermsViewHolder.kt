@@ -13,7 +13,7 @@ class TermsViewHolder(
     companion object {
         fun create(parent: ViewGroup): TermsViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            return TermsViewHolder(ItemTermsBinding.inflate(inflater))
+            return TermsViewHolder(ItemTermsBinding.inflate(inflater, parent, false))
         }
     }
 
@@ -21,9 +21,9 @@ class TermsViewHolder(
         binding.apply {
             name.text = item.name
             termType.text = item.termType.title
-        }
-        binding.root.setOnClickListener {
-            onItemClickListener.onItemClick(item)
+            readMore.setOnClickListener {
+                onItemClickListener.onItemClick(item)
+            }
         }
     }
 

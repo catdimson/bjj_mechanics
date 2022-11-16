@@ -38,6 +38,9 @@ android {
 
 dependencies {
 
+    // youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+
     // Coil
     implementation 'io.coil-kt:coil:0.11.0'
 

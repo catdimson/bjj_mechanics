@@ -35,8 +35,8 @@ class DataSourceImpl(
         return provider.findAllTerms(authMap)
     }
 
-    override suspend fun findTermById(id: Int): Term {
-        return provider.findTermById(id)
+    override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
+        return provider.findTermById(id, authMap)
     }
 
 }

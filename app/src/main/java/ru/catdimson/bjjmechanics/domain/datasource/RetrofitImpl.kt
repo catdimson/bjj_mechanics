@@ -48,11 +48,12 @@ class RetrofitImpl : DataSource {
         return getService().findCoachById(id).await()
     }
 
+    // terms
     override suspend fun findAllTerms(authMap: Map<String, String>): List<Term> {
         return getService().findAllTerms(authMap).await()
     }
 
-    override suspend fun findTermById(id: Int): Term {
-        return getService().findTermById(id).await()
+    override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
+        return getService().findTermById(authMap, id).await()
     }
 }
