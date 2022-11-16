@@ -7,16 +7,16 @@ class SectionsInteractorImpl(
     private val repository: SectionsRepository
 ) : SectionsInteractor {
 
-    override suspend fun findByTitle(title: String): List<SectionInfo> {
-        return repository.findByTitle(title)
+    override suspend fun findByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+        return repository.findByTitle(title, authMap)
     }
 
-    override suspend fun findByCity(city: String): List<SectionInfo> {
-        return repository.findByCity(city)
+    override suspend fun findByCity(city: String, authMap: Map<String, String>): List<SectionInfo> {
+        return repository.findByCity(city, authMap)
     }
 
-    override suspend fun findById(id: Int): SectionInfo {
-        return repository.findById(id)
+    override suspend fun findById(id: Int, authMap: Map<String, String>): SectionInfo {
+        return repository.findById(id, authMap)
     }
 
 }

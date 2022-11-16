@@ -5,7 +5,9 @@ import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 sealed class AppState {
 
-    data class SuccessSections(val data: List<SectionInfo>?) : AppState()
+    data class SuccessSections(val data: List<SectionInfo>) : AppState()
+
+    data class SuccessSectionDetail(val data: Term?) : AppState()
 
     data class SuccessTerms(val data: List<Term>) : AppState()
 

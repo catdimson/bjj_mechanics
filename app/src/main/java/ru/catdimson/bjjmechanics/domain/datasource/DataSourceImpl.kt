@@ -9,16 +9,16 @@ class DataSourceImpl(
 ) : DataSource {
 
     // sections
-    override suspend fun findSectionsByTitle(title: String): List<SectionInfo> {
-        return provider.findSectionsByTitle(title)
+    override suspend fun findSectionsByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+        return provider.findSectionsByTitle(title, authMap)
     }
 
-    override suspend fun findSectionsByCity(city: String): List<SectionInfo> {
-        return provider.findSectionsByCity(city)
+    override suspend fun findSectionsByCity(city: String, authMap: Map<String, String>): List<SectionInfo> {
+        return provider.findSectionsByCity(city, authMap)
     }
 
-    override suspend fun findSectionById(id: Int): SectionInfo {
-        return provider.findSectionById(id)
+    override suspend fun findSectionById(id: Int, authMap: Map<String, String>): SectionInfo {
+        return provider.findSectionById(id, authMap)
     }
 
     // coaches

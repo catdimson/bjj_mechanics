@@ -16,5 +16,5 @@ data class SectionInfo(
     val contacts: List<Contact>,
     val address: Address,
     val coaches: List<Coach>,
-    val isActive: Boolean
+    val isActive: Int
 )

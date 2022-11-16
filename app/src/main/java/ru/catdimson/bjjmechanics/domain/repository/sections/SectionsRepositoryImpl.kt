@@ -7,15 +7,15 @@ class SectionsRepositoryImpl(
     private val dataSource: DataSource
 ) : SectionsRepository {
 
-    override suspend fun findByTitle(title: String): List<SectionInfo> {
-        return dataSource.findSectionsByTitle(title)
+    override suspend fun findByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+        return dataSource.findSectionsByTitle(title, authMap)
     }
 
-    override suspend fun findByCity(city: String): List<SectionInfo> {
-        return dataSource.findSectionsByCity(city)
+    override suspend fun findByCity(city: String, authMap: Map<String, String>): List<SectionInfo> {
+        return dataSource.findSectionsByCity(city, authMap)
     }
 
-    override suspend fun findById(id: Int): SectionInfo {
-        return dataSource.findSectionById(id)
+    override suspend fun findById(id: Int, authMap: Map<String, String>): SectionInfo {
+        return dataSource.findSectionById(id, authMap)
     }
 }
