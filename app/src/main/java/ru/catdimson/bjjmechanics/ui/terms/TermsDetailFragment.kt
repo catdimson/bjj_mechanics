@@ -96,13 +96,10 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                 showViewLoading()
                 if (appState.progress != null) {
                     binding.loading.apply {
-                        progressBarHorizontal.visibility = View.VISIBLE
                         progressBarRound.visibility = View.GONE
-                        progressBarHorizontal.progress = appState.progress
                     }
                 } else {
                     binding.loading.apply {
-                        progressBarHorizontal.visibility = View.GONE
                         progressBarRound.visibility = View.VISIBLE
                     }
                 }

@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/term"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Кимура (Kimura)" />
 
     <TextView
         android:id="@+id/term_type"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         tools:text="Болевой" />
 
     <Button
         android:id="@+id/read_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="0dp"
         android:backgroundTint="@color/black"
-        android:minWidth="0dp"
+        android:minWidth="100dp"
         android:minHeight="40dp"
         android:text="Смотреть"
-        android:textSize="10dp" />
+        android:textSize="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/name" />
 
     <LinearLayout
         android:id="@+id/divider"
@@ -40,7 +48,8 @@
         android:layout_marginBottom="8dp"
         android:background="#837777"
         android:orientation="horizontal"
-        tools:text="" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/term_type" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
