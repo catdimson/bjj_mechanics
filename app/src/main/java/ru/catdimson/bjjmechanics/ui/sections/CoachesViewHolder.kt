@@ -15,21 +15,18 @@ class CoachesViewHolder(
     companion object {
         fun create(parent: ViewGroup): CoachesViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            return CoachesViewHolder(ItemCoachesBinding.inflate(inflater))
+            return CoachesViewHolder(ItemCoachesBinding.inflate(inflater, parent, false))
         }
     }
 
     @SuppressLint("SetTextI18n")
-    fun bind(item: Coach, onItemClickListener: CoachesAdapter.OnListItemClickListener) {
+    fun bind(item: Coach) {
         binding.apply {
             coachPreview.load(item.photoPreviewUrl)
             fio.text = "${item.person.lastName} ${item.person.firstName} ${item.person.middleName}"
             experience.text = "Тренерский стаж: ${item.experience} лет"
             belt.load(item.belt.beltPictureUrl)
             coachInfo.text = item.info
-        }
-        binding.root.setOnClickListener {
-            onItemClickListener.onItemClick(item)
         }
     }
 

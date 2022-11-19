@@ -17,9 +17,7 @@ import ru.catdimson.bjjmechanics.domain.entities.system.User
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
-import ru.catdimson.bjjmechanics.ui.BaseFragment
 import ru.catdimson.bjjmechanics.viewmodel.terms.TermDetailsViewModel
-import ru.catdimson.bjjmechanics.viewmodel.terms.TermsViewModel
 import java.time.LocalDate
 import java.util.*
 import java.util.regex.Pattern
@@ -63,7 +61,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         initIncomingEvents()
         initOutgoingEvents(arguments?.get(TERM_DETAIL_ID) as Int)
 
-        initFakeAdapter()
+        initFakeAdapterData()
     }
 
     private fun initViewModel() {
@@ -133,7 +131,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         }
     }
 
-    private fun initFakeAdapter() {
+    private fun initFakeAdapterData() {
         val fakeData = mutableListOf<Comment>()
 
         for (i in 1..50) {

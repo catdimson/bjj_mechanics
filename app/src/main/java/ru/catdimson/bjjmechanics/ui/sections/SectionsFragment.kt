@@ -32,7 +32,7 @@ class SectionsFragment : AbstractScreenFragment<FragmentSectionsBinding>(Fragmen
         object : SectionsAdapter.OnListItemClickListener {
             override fun onItemClick(data: SectionInfo) {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.container, SectionsDetailFragment.newInstance())
+                    .replace(R.id.container, SectionsDetailFragment.newInstance(data.id))
                     .addToBackStack(null)
                     .commit()
             }

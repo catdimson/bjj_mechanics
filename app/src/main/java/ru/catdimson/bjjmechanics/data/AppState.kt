@@ -7,7 +7,7 @@ sealed class AppState {
 
     data class SuccessSections(val data: List<SectionInfo>) : AppState()
 
-    data class SuccessSectionDetail(val data: Term?) : AppState()
+    data class SuccessSectionDetail(val data: SectionInfo?) : AppState()
 
     data class SuccessTerms(val data: List<Term>) : AppState()
 
