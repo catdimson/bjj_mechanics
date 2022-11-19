@@ -24,7 +24,7 @@ interface ApiService {
         @HeaderMap authMap: Map<String, String>
     ): Deferred<List<SectionInfo>>
 
-    @GET("section/{id}")
+    @GET("section_info/{id}")
     fun findSectionById(
         @Path("id") id: Int,
         @HeaderMap authMap: Map<String, String>

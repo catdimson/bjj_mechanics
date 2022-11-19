@@ -4,9 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 
-class CoachesAdapter(
-    private val onListItemClickListener: OnListItemClickListener
-) : RecyclerView.Adapter<CoachesViewHolder>() {
+class CoachesAdapter : RecyclerView.Adapter<CoachesViewHolder>() {
 
     private var data: List<Coach> = arrayListOf()
 
@@ -20,7 +18,7 @@ class CoachesAdapter(
     }
 
     override fun onBindViewHolder(holder: CoachesViewHolder, position: Int) {
-        holder.bind(getItem(position), onListItemClickListener)
+        holder.bind(getItem(position))
     }
 
     override fun getItemCount(): Int {
@@ -28,8 +26,4 @@ class CoachesAdapter(
     }
 
     private fun getItem(position: Int): Coach = data[position]
-
-    interface OnListItemClickListener {
-        fun onItemClick(data: Coach)
-    }
 }

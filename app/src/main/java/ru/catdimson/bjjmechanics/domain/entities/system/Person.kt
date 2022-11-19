@@ -8,7 +8,7 @@ data class Person(
     val firstName: String,
     val middleName: String,
     val lastName: String,
-    val birthday: LocalDate,
+    val birthday: LocalDate?,
 
     val phone: String
 )
