@@ -1,10 +1,8 @@
 package ru.catdimson.bjjmechanics.domain.entities.system
 
-data class User(
-    val id: Int,
+data class RegistrationData(
     val login: String,
     val password: String,
-    val role: Role,
-    val isActive: Int,
-    val person: Person
+    val name: String,
+    val phone: String
 )

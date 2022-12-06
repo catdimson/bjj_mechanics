@@ -11,9 +11,9 @@ import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentTermsDetailBinding
-import ru.catdimson.bjjmechanics.domain.entities.system.Person
-import ru.catdimson.bjjmechanics.domain.entities.system.Role
-import ru.catdimson.bjjmechanics.domain.entities.system.User
+import ru.catdimson.bjjmechanics.domain.entities.user.Person
+import ru.catdimson.bjjmechanics.domain.entities.user.Role
+import ru.catdimson.bjjmechanics.domain.entities.user.User
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
@@ -157,7 +157,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                             "+7920111223" + i
                         )
                     ),
-                    LocalDate.now()
+//                    LocalDate.now()
                 )
             )
         }

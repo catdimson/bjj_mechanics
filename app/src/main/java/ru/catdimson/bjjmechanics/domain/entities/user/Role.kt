@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.domain.entities.system
+package ru.catdimson.bjjmechanics.domain.entities.user
 
 data class Role(
     val id: Int,

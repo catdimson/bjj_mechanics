@@ -13,19 +13,9 @@ import ru.catdimson.bjjmechanics.databinding.FragmentSectionsDetailBinding
 import ru.catdimson.bjjmechanics.domain.entities.sections.Belt
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
-import ru.catdimson.bjjmechanics.domain.entities.system.Person
-import ru.catdimson.bjjmechanics.domain.entities.system.Role
-import ru.catdimson.bjjmechanics.domain.entities.system.User
-import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
-import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.domain.entities.user.Person
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
-import ru.catdimson.bjjmechanics.ui.BaseFragment
-import ru.catdimson.bjjmechanics.ui.terms.CommentAdapter
-import ru.catdimson.bjjmechanics.ui.terms.TERM_DETAIL_ID
-import ru.catdimson.bjjmechanics.ui.terms.TermsDetailFragment
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionDetailsViewModel
-import ru.catdimson.bjjmechanics.viewmodel.terms.TermDetailsViewModel
-import java.time.LocalDate
 import java.util.*
 
 const val SECTION_DETAIL_ID = "SECTION_DETAIL_ID"

@@ -6,13 +6,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
+import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 class RetrofitImpl : DataSource {
 
     private val api by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_API_URL)
+            .baseUrl(DEBUG_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
@@ -26,6 +30,7 @@ class RetrofitImpl : DataSource {
 
     companion object {
         private const val BASE_API_URL = "http://45.144.2.195:8080/"
+        private const val DEBUG_API_URL = "http://localhost:8080/"
     }
 
     // sections
@@ -56,5 +61,22 @@ class RetrofitImpl : DataSource {
 
     override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
         return getService().findTermById(authMap, id).await()
+    }
+
+    // auth
+    override suspend fun login(jwtRequest: JwtRequest): JwtResponse {
+        return getService().login(jwtRequest).await()
+    }
+
+    override suspend fun token(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return getService().token(jwtRefreshRequest).await()
+    }
+
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return getService().refresh(jwtRefreshRequest).await()
+    }
+
+    override suspend fun registration(regData: RegistrationData) {
+        getService().registration(regData)
     }
 }

@@ -4,12 +4,16 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.catdimson.bjjmechanics.domain.datasource.DataSource
 import ru.catdimson.bjjmechanics.domain.datasource.RetrofitImpl
+import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
+import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractorImpl
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.coaching.CoachesInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.coaching.CoachesInteractorImpl
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.sections.SectionsInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.sections.SectionsInteractorImpl
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractorImpl
+import ru.catdimson.bjjmechanics.domain.repository.auth.AuthRepository
+import ru.catdimson.bjjmechanics.domain.repository.auth.AuthRepositoryImpl
 import ru.catdimson.bjjmechanics.domain.repository.coaching.CoachesRepository
 import ru.catdimson.bjjmechanics.domain.repository.coaching.CoachesRepositoryImpl
 import ru.catdimson.bjjmechanics.domain.repository.sections.SectionsRepository
@@ -54,6 +58,13 @@ val termDetailsScreen = module {
         scoped<TermsRepository> { TermsRepositoryImpl(dataSource = get()) }
         scoped<TermsInteractor> { TermsInteractorImpl(repository = get()) }
         factory { TermDetailsViewModel(interactor = get()) }
+    }
+}
+
+val authScreen = module {
+    scope(named("authScope")) {
+        scoped<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
+        scoped<AuthInteractor> { AuthInteractorImpl(repository = get()) }
     }
 }
 

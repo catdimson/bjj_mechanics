@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.databinding.FragmentMainBinding
 import ru.catdimson.bjjmechanics.ui.BaseFragment
+import ru.catdimson.bjjmechanics.ui.auth.AuthFragment
 import ru.catdimson.bjjmechanics.ui.sections.SectionsFragment
 import ru.catdimson.bjjmechanics.ui.terms.TermsFragment
 
@@ -42,18 +43,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun initBottomNavigationMenu() {
         binding.menuBottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_item1 -> {
-                    navigationTo(SectionsFragment.newInstance())
-                    true
-                }
-                R.id.menu_item2 -> {
-                    navigationTo(SectionsFragment.newInstance())
-                    true
-                }
-//                R.id.menu_item3 -> {
+                R.id.menu_item_education -> {
 //                    navigationTo(SectionsFragment.newInstance())
-//                    true
-//                }
+                    true
+                }
+                R.id.menu_item_auth -> {
+                    navigationTo(AuthFragment.newInstance())
+                    true
+                }
                 R.id.menu_item_terms -> {
                     navigationTo(TermsFragment.newInstance())
                     true
