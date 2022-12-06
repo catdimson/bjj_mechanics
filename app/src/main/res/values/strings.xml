@@ -7,4 +7,6 @@
     <string name="page_registration">Войти</string>
     <string name="coaches_collection">Тренерский состав:</string>
     <string name="input">Вход</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
 </resources>
