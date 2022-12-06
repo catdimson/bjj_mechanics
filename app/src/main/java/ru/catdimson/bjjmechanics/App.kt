@@ -18,7 +18,9 @@ class App : Application() {
                 sectionDetailsScreen,
 
                 termsScreen,
-                termDetailsScreen
+                termDetailsScreen,
+
+                authScreen
             )
         }
     }

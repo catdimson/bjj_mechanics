@@ -1,6 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.entities.sections
 
-import ru.catdimson.bjjmechanics.domain.entities.system.Person
+import ru.catdimson.bjjmechanics.domain.entities.user.Person
 
 data class Coach(
     val id: Int,

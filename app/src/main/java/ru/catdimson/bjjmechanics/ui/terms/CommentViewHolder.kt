@@ -20,7 +20,7 @@ class CommentViewHolder(
     fun bind(item: Comment) {
         binding.apply {
             login.text = item.user.login
-            createDate.text = item.createDate.toString()
+//            createDate.text = item.createDate.toString()
             text.text = item.text
         }
     }

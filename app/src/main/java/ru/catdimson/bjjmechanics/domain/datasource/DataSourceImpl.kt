@@ -2,6 +2,10 @@ package ru.catdimson.bjjmechanics.domain.datasource
 
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
+import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 class DataSourceImpl(
@@ -37,6 +41,23 @@ class DataSourceImpl(
 
     override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
         return provider.findTermById(id, authMap)
+    }
+
+    // auth
+    override suspend fun login(jwtRequest: JwtRequest): JwtResponse {
+        return provider.login(jwtRequest)
+    }
+
+    override suspend fun token(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return provider.token(jwtRefreshRequest)
+    }
+
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return provider.refresh(jwtRefreshRequest)
+    }
+
+    override suspend fun registration(regData: RegistrationData) {
+        provider.registration(regData)
     }
 
 }
