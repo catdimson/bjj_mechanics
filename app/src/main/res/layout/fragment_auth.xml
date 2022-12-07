@@ -17,18 +17,49 @@
             app:layout_constraintGuide_percent="0.85"
             android:layout_height="wrap_content" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/login_form"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_border"
             android:layout_width="wrap_content"
-            app:constraint_referenced_ids="login, password, screen_title"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/login_group"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="login, password, screen_title, btn_input"
             android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/registration_group"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids=""
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/logout_group"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids=""
+            android:layout_height="wrap_content" />
+
+
 
         <TextView
             android:id="@+id/screen_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/login"
             android:textAlignment="center"
@@ -41,16 +72,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/screen_title"
-            app:layout_constraintBottom_toTopOf="@+id/password"
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/ic_space_mars_photo_alien"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/login"
             app:endIconMode="clear_text"
-            android:hint="@string/login">
+            app:layout_constraintBottom_toTopOf="@+id/password"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            app:layout_constraintRight_toRightOf="@id/right_border"
+            app:layout_constraintTop_toBottomOf="@+id/screen_title"
+            app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -60,12 +91,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/login"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien"
             app:endIconMode="password_toggle"
             android:hint="@string/password">
@@ -77,6 +109,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/btn_input"
+            android:layout_width="0dp"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            app:layout_constraintRight_toRightOf="@id/right_border"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_input"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include android:id="@+id/loading" layout="@layout/loading_layout" />
 
 </FrameLayout>

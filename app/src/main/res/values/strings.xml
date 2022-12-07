@@ -9,4 +9,5 @@
     <string name="input">Вход</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
+    <string name="btn_input">Войти</string>
 </resources>
