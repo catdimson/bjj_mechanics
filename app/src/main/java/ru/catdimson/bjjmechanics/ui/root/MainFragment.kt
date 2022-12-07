@@ -44,7 +44,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.menuBottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item_education -> {
-//                    navigationTo(SectionsFragment.newInstance())
+                    navigationTo(SectionsFragment.newInstance())
                     true
                 }
                 R.id.menu_item_auth -> {
