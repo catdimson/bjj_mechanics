@@ -34,7 +34,7 @@
         <androidx.constraintlayout.widget.Group
             android:id="@+id/login_group"
             android:layout_width="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="login, password, screen_title, btn_input"
             android:layout_height="wrap_content" />
 

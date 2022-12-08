@@ -9,11 +9,14 @@ import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationServiceImpl
+import ru.catdimson.bjjmechanics.core.validations.LoginValidation
+import ru.catdimson.bjjmechanics.core.validations.PasswordValidation
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
+import kotlin.math.log
 
 class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate)  {
 
@@ -67,7 +70,26 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         } else {
             viewModel.onRefreshToken(refreshToken)
         }
+        binding.btnInput.setOnClickListener {
+            val loginField = binding.login
+            val passwordField = binding.password
 
+            val loginValidation = LoginValidation(loginField.editText?.text.toString())
+            val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
+
+            if (!loginValidation.isValid()) {
+                loginField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 4 до 32"
+            } else {
+                loginField.error = null
+                loginField.isErrorEnabled = false
+            }
+            if (!passwordValidation.isValid()) {
+                passwordField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 8 до 32"
+            } else {
+                passwordField.error = null
+                passwordField.isErrorEnabled = false
+            }
+        }
     }
 
     override fun renderData(appState: AppState) {
