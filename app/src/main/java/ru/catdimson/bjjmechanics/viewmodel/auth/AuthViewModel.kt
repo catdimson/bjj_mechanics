@@ -1,17 +1,23 @@
 package ru.catdimson.bjjmechanics.viewmodel.auth
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.catdimson.bjjmechanics.App
+import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
 
 class AuthViewModel(
-    private val interactor: AuthInteractor
-) : BaseViewModel<AppState>() {
+    private val interactor: AuthInteractor,
+    private val authService: AuthorizationService,
+    application: Application
+) : BaseAndroidViewModel<AppState>(application) {
 
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 
@@ -33,6 +39,10 @@ class AuthViewModel(
         viewModelCoroutineScope.launch {
             registrationStartState()
         }
+    }
+
+    fun onLogout() {
+        authService.removeTokens(getApplication<App>())
     }
 
     fun onRefreshToken(refreshToken: String) {

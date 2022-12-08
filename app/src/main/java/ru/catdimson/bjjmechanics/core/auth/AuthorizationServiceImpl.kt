@@ -29,6 +29,11 @@ class AuthorizationServiceImpl : AuthorizationService {
         saveValueString(REFRESH_TOKEN, jwtResponse.refreshToken, context)
     }
 
+    override fun removeTokens(context: Context) {
+        val sp = context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE)
+        sp.edit().clear().apply()
+    }
+
     private fun getValueString(KEY: String, context: Context): String? {
         return context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE).getString(KEY, null)
     }

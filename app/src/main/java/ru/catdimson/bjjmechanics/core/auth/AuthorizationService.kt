@@ -13,4 +13,6 @@ interface AuthorizationService {
 
     fun saveTokensToSharedPref(jwtResponse: JwtResponse, context: Context)
 
+    fun removeTokens(context: Context)
+
 }

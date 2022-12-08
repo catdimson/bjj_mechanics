@@ -16,9 +16,8 @@ import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
-import kotlin.math.log
 
-class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate)  {
+class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 
     private lateinit var viewModel: AuthViewModel
     private lateinit var authService: AuthorizationService
@@ -78,17 +77,27 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
             val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
 
             if (!loginValidation.isValid()) {
-                loginField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 4 до 32"
+                loginField.error =
+                    "Допустимые символы: цифры, буквы, знак _ в количестве от 4 до 32"
             } else {
                 loginField.error = null
                 loginField.isErrorEnabled = false
             }
             if (!passwordValidation.isValid()) {
-                passwordField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 8 до 32"
+                passwordField.error =
+                    "Допустимые символы: цифры, буквы, знак _ в количестве от 8 до 32"
             } else {
                 passwordField.error = null
                 passwordField.isErrorEnabled = false
             }
+        }
+        initLogoutEvents()
+
+    }
+
+    private fun initLogoutEvents() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.onLogout()
         }
     }
 

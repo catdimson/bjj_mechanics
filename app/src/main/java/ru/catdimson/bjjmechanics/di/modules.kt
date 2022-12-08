@@ -65,7 +65,11 @@ val authScreen = module {
     scope(named("authScope")) {
         scoped<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
         scoped<AuthInteractor> { AuthInteractorImpl(repository = get()) }
-        factory { AuthViewModel(interactor = get()) }
+        factory { AuthViewModel(
+            interactor = get(),
+            authService = AuthorizationServiceImpl(),
+            get()
+        ) }
     }
 }
 

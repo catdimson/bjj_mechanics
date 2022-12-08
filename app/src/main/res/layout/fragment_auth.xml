@@ -119,6 +119,16 @@
             android:text="@string/btn_input"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            app:layout_constraintRight_toRightOf="@id/right_border"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_logout"
+            app:layout_constraintTop_toBottomOf="@+id/btn_input" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include android:id="@+id/loading" layout="@layout/loading_layout" />
