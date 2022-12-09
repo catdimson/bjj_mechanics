@@ -153,8 +153,8 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                             "Иван " + i,
                             "Иванович " + i,
                             "Иванов " + i,
-                            LocalDate.now(),
-                            "+7920111223" + i
+                            "+7920111223" + i,
+                            LocalDate.now()
                         )
                     ),
 //                    LocalDate.now()

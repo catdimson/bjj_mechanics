@@ -1,12 +1,17 @@
 package ru.catdimson.bjjmechanics.data
 
+import retrofit2.Response
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 sealed class AppState {
 
+    data class SuccessLogoutState(val data: Boolean?) : AppState()
+
     data class SuccessLogin(val data: JwtResponse) : AppState()
+
+    data class SuccessRegistration(val data: Response<Void>) : AppState()
 
     data class SuccessRegistrationState(val data: Boolean?) : AppState()
 

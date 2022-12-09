@@ -5,20 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
+import ru.catdimson.bjjmechanics.App
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationServiceImpl
 import ru.catdimson.bjjmechanics.core.validations.LoginValidation
 import ru.catdimson.bjjmechanics.core.validations.PasswordValidation
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
+import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
+import ru.catdimson.bjjmechanics.domain.entities.user.Person
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
-import kotlin.math.log
 
-class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate)  {
+class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 
     private lateinit var viewModel: AuthViewModel
     private lateinit var authService: AuthorizationService
@@ -69,31 +72,62 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
             viewModel.onAuthStartState()
         } else {
             viewModel.onRefreshToken(refreshToken)
+            viewModel.onLogoutState()
         }
+
+        initLoginEvents()
+        initRegistrationEvents()
+        initLogoutEvents()
+    }
+
+    private fun initLoginEvents() {
+        // обрабатываем нажатие кнопки "Не зарегистрированы?"
+        binding.registrationLink.setOnClickListener {
+            viewModel.onRegistrationStartState()
+        }
+
+        // обрабатываем нажатие кнопки "Войти"
         binding.btnInput.setOnClickListener {
-            val loginField = binding.login
-            val passwordField = binding.password
-
-            val loginValidation = LoginValidation(loginField.editText?.text.toString())
-            val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
-
-            if (!loginValidation.isValid()) {
-                loginField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 4 до 32"
-            } else {
-                loginField.error = null
-                loginField.isErrorEnabled = false
+            if (validateLogin(binding.login) && validatePassword(binding.password)) {
+                viewModel.onLogin(
+                     RegistrationData(
+                        binding.login.editText?.text.toString(),
+                        binding.password.editText?.text.toString()
+                    )
+                )
             }
-            if (!passwordValidation.isValid()) {
-                passwordField.error = "Допустимые символы: цифры, буквы, знак _ в количестве от 8 до 32"
-            } else {
-                passwordField.error = null
-                passwordField.isErrorEnabled = false
+        }
+    }
+
+    private fun initRegistrationEvents() {
+        // обрабатываем нажатие кнопки "Зарегистрироваться"
+        binding.btnRegistration.setOnClickListener {
+            if (validateRegistrationData()) {
+                val regData = RegistrationData(
+                    binding.registrationLogin.editText?.text.toString(),
+                    binding.registrationPassword.editText?.text.toString()
+                )
+                viewModel.onRegistration(regData)
             }
+        }
+    }
+
+    private fun initLogoutEvents() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.onLogout()
         }
     }
 
     override fun renderData(appState: AppState) {
         when (appState) {
+            is AppState.SuccessLogoutState -> {
+                showLogoutView()
+                showViewWorking()
+            }
+            is AppState.SuccessRegistration -> {
+                showLogoutView()
+                showViewWorking()
+            }
             is AppState.SuccessAuthStartingState -> {
                 showLoginView()
                 showViewWorking()
@@ -161,22 +195,63 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
 
     private fun showLogoutView() {
         binding.apply {
-            logoutGroup.visibility = View.VISIBLE
             loginGroup.visibility = View.GONE
             registrationGroup.visibility = View.GONE
+            logoutGroup.visibility = View.VISIBLE
         }
     }
 
     private fun showLoginView() {
         binding.apply {
             logoutGroup.visibility = View.GONE
-            loginGroup.visibility = View.VISIBLE
             registrationGroup.visibility = View.GONE
+            loginGroup.visibility = View.VISIBLE
         }
     }
 
     private fun saveTokens(jwtResponse: JwtResponse) {
         authService.saveTokensToSharedPref(jwtResponse, requireContext())
+    }
+
+    private fun validateLogin(loginField: TextInputLayout) : Boolean {
+        val loginValidation = LoginValidation(loginField.editText?.text.toString())
+
+        return if (!loginValidation.isValid()) {
+            loginField.error =
+                "Логин должен состоять из цифр, букв и знаков _ в количестве от 4 до 32"
+            false
+        } else {
+            loginField.error = null
+            loginField.isErrorEnabled = false
+            true
+        }
+    }
+
+    private fun validatePassword(passwordField: TextInputLayout) : Boolean {
+        val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
+
+
+        return if (!passwordValidation.isValid()) {
+            passwordField.error =
+                "Пароль должен состоять из цифр, букв и знаков _ в количестве от 8 до 32"
+            false
+        } else {
+            passwordField.error = null
+            passwordField.isErrorEnabled = false
+            true
+        }
+    }
+
+    private fun validateEmail() : Boolean {
+        return true
+    }
+
+    private fun validatePhone() : Boolean {
+        return true
+    }
+
+    private fun validateRegistrationData() : Boolean {
+        return validateLogin(binding.registrationLogin) && validatePassword(binding.registrationPassword) && validateEmail() && validatePhone()
     }
 
     override fun onDestroy() {

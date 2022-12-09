@@ -1,6 +1,7 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.http.*
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
@@ -58,7 +59,7 @@ interface ApiService {
     @POST("auth/")
     fun registration(
         @Body regData: RegistrationData
-    )
+    ): Deferred<Response<Void>>
 
     @POST("auth/login")
     fun login(

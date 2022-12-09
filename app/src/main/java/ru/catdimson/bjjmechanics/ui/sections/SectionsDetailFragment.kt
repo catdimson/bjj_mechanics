@@ -141,8 +141,8 @@ class SectionsDetailFragment : AbstractScreenFragment<FragmentSectionsDetailBind
                         "Александр",
                         "Андреевич",
                         "Василенко",
-                        null,
-                        "8920777880" + i
+                        "8920777880" + i,
+                        null
                     ),
                     Belt(
                         i,

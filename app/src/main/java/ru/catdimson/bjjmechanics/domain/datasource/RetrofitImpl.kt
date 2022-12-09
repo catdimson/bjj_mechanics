@@ -2,6 +2,7 @@ package ru.catdimson.bjjmechanics.domain.datasource
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
@@ -76,7 +77,7 @@ class RetrofitImpl : DataSource {
         return getService().refresh(jwtRefreshRequest).await()
     }
 
-    override suspend fun registration(regData: RegistrationData) {
-        getService().registration(regData)
+    override suspend fun registration(regData: RegistrationData): Response<Void> {
+        return getService().registration(regData).await()
     }
 }

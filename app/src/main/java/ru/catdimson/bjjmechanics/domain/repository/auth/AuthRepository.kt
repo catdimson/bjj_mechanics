@@ -1,5 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.repository.auth
 
+import retrofit2.Response
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
@@ -17,6 +18,6 @@ interface AuthRepository : Repository {
 
     suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
 
-    suspend fun registration(regData: RegistrationData)
+    suspend fun registration(regData: RegistrationData): Response<Void>
 
 }
