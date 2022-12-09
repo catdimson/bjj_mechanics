@@ -9,9 +9,11 @@ import ru.catdimson.bjjmechanics.App
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
+import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
-import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
+import java.lang.RuntimeException
 
 class AuthViewModel(
     private val interactor: AuthInteractor,
@@ -33,6 +35,14 @@ class AuthViewModel(
         }
     }
 
+    fun onLogoutState() {
+        liveData.value = AppState.SuccessLogoutState(null)
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            logoutState()
+        }
+    }
+
     fun onRegistrationStartState() {
         liveData.value = AppState.Loading(null)
         cancelJob()
@@ -41,8 +51,27 @@ class AuthViewModel(
         }
     }
 
+    fun onRegistration(regData: RegistrationData) {
+        liveData.value = AppState.Loading(null)
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            registration(regData)
+        }
+    }
+
+    fun onLogin(regData: RegistrationData) {
+        liveData.value = AppState.Loading(null)
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            login(regData)
+        }
+    }
+
     fun onLogout() {
         authService.removeTokens(getApplication<App>())
+        viewModelCoroutineScope.launch {
+            authStartState()
+        }
     }
 
     fun onRefreshToken(refreshToken: String) {
@@ -53,9 +82,32 @@ class AuthViewModel(
         }
     }
 
+    private suspend fun registration(regData: RegistrationData) {
+        withContext(Dispatchers.IO) {
+            val response = interactor.registration(regData)
+            if (response.isSuccessful) {
+                val jwtRequest = JwtRequest(
+                    regData.login,
+                    regData.password
+                )
+                val jwtResponse = interactor.login(jwtRequest)
+                authService.saveTokensToSharedPref(jwtResponse, getApplication())
+            } else {
+                liveData.postValue(AppState.Error(RuntimeException("Неизвестная ошибка. Попробуйте позже")))
+            }
+            liveData.postValue(AppState.SuccessRegistration(response))
+        }
+    }
+
     private suspend fun refresh(jwtRefresh: JwtRefreshRequest) {
         withContext(Dispatchers.IO) {
             liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh)))
+        }
+    }
+
+    private suspend fun logoutState() {
+        withContext(Dispatchers.IO) {
+            liveData.postValue(AppState.SuccessLogoutState(null))
         }
     }
 
@@ -69,6 +121,16 @@ class AuthViewModel(
         withContext(Dispatchers.IO) {
             liveData.postValue(AppState.SuccessRegistrationState(null))
         }
+    }
+
+    private suspend fun login(regData: RegistrationData) {
+        val jwtRequest = JwtRequest(
+            regData.login,
+            regData.password
+        )
+        val jwtResponse = interactor.login(jwtRequest)
+        authService.saveTokensToSharedPref(jwtResponse, getApplication())
+        liveData.postValue(AppState.SuccessLogoutState(null))
     }
 
     override fun handleError(error: Throwable) {

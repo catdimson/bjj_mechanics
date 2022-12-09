@@ -1,5 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
+import retrofit2.Response
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
@@ -56,8 +57,8 @@ class DataSourceImpl(
         return provider.refresh(jwtRefreshRequest)
     }
 
-    override suspend fun registration(regData: RegistrationData) {
-        provider.registration(regData)
+    override suspend fun registration(regData: RegistrationData): Response<Void> {
+        return provider.registration(regData)
     }
 
 }

@@ -1,5 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
+import retrofit2.Response
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
@@ -34,6 +35,6 @@ interface DataSource {
 
     suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
 
-    suspend fun registration(regData: RegistrationData)
+    suspend fun registration(regData: RegistrationData): Response<Void>
 
 }
