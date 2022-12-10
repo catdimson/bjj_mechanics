@@ -9,10 +9,14 @@ interface AuthorizationService {
 
     fun getRefreshTokenFromSharedPref(context: Context): String?
 
+    fun getUserId(context: Context): Int?
+
     fun saveTokensToSharedPref(token: String, refreshToken: String, context: Context)
 
     fun saveTokensToSharedPref(jwtResponse: JwtResponse, context: Context)
 
-    fun removeTokens(context: Context)
+    fun saveCurrentUserId(userId: Int, context: Context)
+
+    fun clearSharedPreferences(context: Context)
 
 }

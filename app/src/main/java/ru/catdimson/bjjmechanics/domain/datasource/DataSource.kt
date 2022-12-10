@@ -7,7 +7,9 @@ import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
+import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 
 interface DataSource {
 
@@ -27,6 +29,8 @@ interface DataSource {
     suspend fun findAllTerms(authMap: Map<String, String>): List<Term>
 
     suspend fun findTermById(id: Int, authMap: Map<String, String>): Term
+
+    suspend fun saveTermComment(commentDto: CommentDto, tokens: Map<String, String>): Response<Void>
 
     // auth
     suspend fun login(jwtRequest: JwtRequest): JwtResponse

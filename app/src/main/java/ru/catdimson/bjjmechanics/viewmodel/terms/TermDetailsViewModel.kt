@@ -10,6 +10,9 @@ import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractor
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.domain.entities.user.User
+import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 
 class TermDetailsViewModel(
@@ -43,6 +46,30 @@ class TermDetailsViewModel(
                 liveData.postValue(AppState.SuccessTermDetailWithAccess(termsInteractor.findById(id, authMap)))
             } else {
                 liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id, authMap)))
+            }
+        }
+    }
+
+    fun sendComment(commentText: String, termId: Int) {
+        liveData.value = AppState.Loading(null)
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            saveComment(commentText, termId)
+        }
+    }
+
+    private suspend fun saveComment(commentText: String, termId: Int) {
+        withContext(Dispatchers.IO) {
+            val userId = authService.getUserId(getApplication())
+//            val authMap = mutableMapOf<String, String>().put(
+//                "Auth"
+//            )
+            if (userId != null) {
+                val commentDto = CommentDto(commentText, userId, termId)
+//                termsInteractor.saveTermComment(commentDto, authMap)
+//                liveData.postValue(AppState.SuccessTermDetailSendComment())
+            } else {
+                liveData.postValue(AppState.Error(IllegalArgumentException("Что-то пошло не так")))
             }
         }
     }

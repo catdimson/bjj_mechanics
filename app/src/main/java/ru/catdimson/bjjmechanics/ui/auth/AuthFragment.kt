@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
-import ru.catdimson.bjjmechanics.App
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationServiceImpl
 import ru.catdimson.bjjmechanics.core.validations.LoginValidation
@@ -17,7 +16,6 @@ import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
-import ru.catdimson.bjjmechanics.domain.entities.user.Person
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
 
@@ -90,7 +88,7 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         binding.btnInput.setOnClickListener {
             if (validateLogin(binding.login) && validatePassword(binding.password)) {
                 viewModel.onLogin(
-                     RegistrationData(
+                    RegistrationData(
                         binding.login.editText?.text.toString(),
                         binding.password.editText?.text.toString()
                     )
@@ -213,7 +211,7 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         authService.saveTokensToSharedPref(jwtResponse, requireContext())
     }
 
-    private fun validateLogin(loginField: TextInputLayout) : Boolean {
+    private fun validateLogin(loginField: TextInputLayout): Boolean {
         val loginValidation = LoginValidation(loginField.editText?.text.toString())
 
         return if (!loginValidation.isValid()) {
@@ -227,7 +225,7 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         }
     }
 
-    private fun validatePassword(passwordField: TextInputLayout) : Boolean {
+    private fun validatePassword(passwordField: TextInputLayout): Boolean {
         val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
 
 
@@ -242,15 +240,15 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         }
     }
 
-    private fun validateEmail() : Boolean {
+    private fun validateEmail(): Boolean {
         return true
     }
 
-    private fun validatePhone() : Boolean {
+    private fun validatePhone(): Boolean {
         return true
     }
 
-    private fun validateRegistrationData() : Boolean {
+    private fun validateRegistrationData(): Boolean {
         return validateLogin(binding.registrationLogin) && validatePassword(binding.registrationPassword) && validateEmail() && validatePhone()
     }
 

@@ -9,6 +9,7 @@ class AuthorizationServiceImpl : AuthorizationService {
         private const val AUTH_DATAS = "AUTH_DATAS"
         private const val ACCESS_TOKEN = "TOKEN"
         private const val REFRESH_TOKEN = "REFRESH_TOKEN"
+        private const val USER_ID = "USER_ID"
     }
 
     override fun getAccessTokenFromSharedPref(context: Context): String? {
@@ -29,18 +30,36 @@ class AuthorizationServiceImpl : AuthorizationService {
         saveValueString(REFRESH_TOKEN, jwtResponse.refreshToken, context)
     }
 
-    override fun removeTokens(context: Context) {
+    override fun saveCurrentUserId(userId: Int, context: Context) {
+        saveValueInt(USER_ID, userId, context)
+    }
+
+    override fun clearSharedPreferences(context: Context) {
         val sp = context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE)
         sp.edit().clear().apply()
+    }
+
+    override fun getUserId(context: Context): Int? {
+        return getValueInt(USER_ID, context)
     }
 
     private fun getValueString(KEY: String, context: Context): String? {
         return context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE).getString(KEY, null)
     }
 
+    private fun getValueInt(KEY: String, context: Context): Int? {
+        return context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE).getInt(KEY, 0)
+    }
+
     private fun saveValueString(KEY: String, VALUE: String, context: Context) {
         val editor = context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE).edit()
         editor.putString(KEY, VALUE)
+        editor.apply()
+    }
+
+    private fun saveValueInt(KEY: String, VALUE: Int, context: Context) {
+        val editor = context.getSharedPreferences(AUTH_DATAS, Context.MODE_PRIVATE).edit()
+        editor.putInt(KEY, VALUE)
         editor.apply()
     }
 }
