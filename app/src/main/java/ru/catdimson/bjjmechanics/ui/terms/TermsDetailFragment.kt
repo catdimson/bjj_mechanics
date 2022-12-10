@@ -60,8 +60,6 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         initViewModel()
         initIncomingEvents()
         initOutgoingEvents(arguments?.get(TERM_DETAIL_ID) as Int)
-
-        initFakeAdapterData()
     }
 
     private fun initViewModel() {
@@ -86,6 +84,17 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                     if (it == null) {
                         Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
                     } else {
+                        setDataToScreen(it)
+                    }
+                }
+            }
+            is AppState.SuccessTermDetailWithAccess -> {
+                showViewWorking()
+                appState.data.let {
+                    if (it == null) {
+                        Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
+                    } else {
+                        showViewComments()
                         setDataToScreen(it)
                     }
                 }
@@ -123,46 +132,13 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
 
     private fun setDataToScreen(term: Term?) {
         showVideo(extractYoutubeId(term?.video?.url!!))
+        adapter.setData(term?.video?.comments)
         binding.apply {
             name.text = term?.name
             termType.text = term?.termType?.title
             description.text = term?.description
             commentsRecyclerView.adapter = adapter
         }
-    }
-
-    private fun initFakeAdapterData() {
-        val fakeData = mutableListOf<Comment>()
-
-        for (i in 1..50) {
-            fakeData.add(
-                Comment(
-                    i,
-                    "Очень содержательный комментарий " + i,
-                    User(i,
-                        "user" + i,
-                        "pass" + i,
-                        Role(
-                            1,
-                            "Пользователь",
-                            "Рядовой юзер"
-                        ),
-                        1,
-                        Person(
-                            i,
-                            "Иван " + i,
-                            "Иванович " + i,
-                            "Иванов " + i,
-                            "+7920111223" + i,
-                            LocalDate.now()
-                        )
-                    ),
-//                    LocalDate.now()
-                )
-            )
-        }
-
-        adapter.setData(fakeData)
     }
 
     private fun showVideo(videoId: String) {
@@ -179,7 +155,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         binding.video.visibility = View.VISIBLE
     }
 
-    fun extractYoutubeId(ytUrl: String): String {
+    private fun extractYoutubeId(ytUrl: String): String {
         var vId: String? = null
         val pattern = Pattern.compile(
             "(?:https?:\\/\\/)?(?:www\\.)?youtu\\.?be(?:\\.com)?\\/?.*(?:watch|embed)?(?:.*v=|v\\/|\\/)([\\w\\-_]+)\\&?"
@@ -189,5 +165,12 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
             vId = matcher.group(1)
         }
         return vId!!
+    }
+
+    private fun showViewComments() {
+        binding.apply {
+            isNotAuthMessage.visibility = View.GONE
+            commentWrapper.visibility = View.VISIBLE
+        }
     }
 }

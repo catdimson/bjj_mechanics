@@ -8,8 +8,10 @@ class CommentAdapter() : RecyclerView.Adapter<CommentViewHolder>() {
 
     private var data: List<Comment> = arrayListOf()
 
-    fun setData(data: List<Comment>) {
-        this.data = data
+    fun setData(data: List<Comment>?) {
+        if (data != null) {
+            this.data = data
+        }
         notifyDataSetChanged()
     }
 
