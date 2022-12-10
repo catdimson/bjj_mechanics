@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import ru.catdimson.bjjmechanics.App
 import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
@@ -21,6 +22,7 @@ class AuthViewModel(
     application: Application
 ) : BaseAndroidViewModel<AppState>(application) {
 
+    private val patternUserId = """.*\/(?<userId>\d+)$""".toRegex()
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 
     fun subscribe(): LiveData<AppState> {
@@ -68,7 +70,7 @@ class AuthViewModel(
     }
 
     fun onLogout() {
-        authService.removeTokens(getApplication<App>())
+        authService.clearSharedPreferences(getApplication<App>())
         viewModelCoroutineScope.launch {
             authStartState()
         }
@@ -85,18 +87,39 @@ class AuthViewModel(
     private suspend fun registration(regData: RegistrationData) {
         withContext(Dispatchers.IO) {
             val response = interactor.registration(regData)
-            if (response.isSuccessful) {
+            val userId = extractUserId(response)
+            if (response.isSuccessful && userId != null) {
                 val jwtRequest = JwtRequest(
                     regData.login,
                     regData.password
                 )
                 val jwtResponse = interactor.login(jwtRequest)
                 authService.saveTokensToSharedPref(jwtResponse, getApplication())
+                authService.saveCurrentUserId(userId, getApplication())
             } else {
                 liveData.postValue(AppState.Error(RuntimeException("Неизвестная ошибка. Попробуйте позже")))
             }
             liveData.postValue(AppState.SuccessRegistration(response))
         }
+    }
+
+    private fun extractUserId(response: Response<Void>): Int? {
+        val location = response.headers().get("Location")
+
+        if (location != null) {
+            val matcher = patternUserId.matchEntire(location)
+
+            if (matcher != null) {
+                val groups = matcher.groups as? MatchNamedGroupCollection
+
+                if (groups != null) {
+                    return groups["userId"]?.value?.toInt()
+                }
+                return null
+            }
+            return null
+        }
+        return null
     }
 
     private suspend fun refresh(jwtRefresh: JwtRefreshRequest) {

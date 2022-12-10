@@ -32,6 +32,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
     )
     private val adapter by lazy { CommentAdapter() }
+    private var videoId = null
 
     companion object {
         @JvmStatic
@@ -68,6 +69,14 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
 
     private fun initOutgoingEvents(id: Int) {
         viewModel.onShowTermById(id, authMap)
+
+        binding.commentBtnSend.setOnClickListener {
+            val commentText = binding.commentField.text.toString()
+
+            if (commentText.isNotBlank()) {
+                viewModel.sendComment(commentText, id)
+            }
+        }
     }
 
     private fun initIncomingEvents() {
@@ -85,6 +94,17 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
                         Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
                     } else {
                         setDataToScreen(it)
+                    }
+                }
+            }
+            is AppState.SuccessTermDetailSendComment -> {
+                showViewWorking()
+                appState.data.let {
+                    if (it == null) {
+                        Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
+                    } else {
+                        showViewComments()
+//                        setDataToScreen(it)
                     }
                 }
             }
@@ -132,7 +152,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
 
     private fun setDataToScreen(term: Term?) {
         showVideo(extractYoutubeId(term?.video?.url!!))
-        adapter.setData(term?.video?.comments)
+        adapter.setData(term?.comments)
         binding.apply {
             name.text = term?.name
             termType.text = term?.termType?.title

@@ -5,5 +5,6 @@ data class Term(
    val name: String,
    val description: String,
    val video: Video,
-   val termType: TermType
+   val termType: TermType,
+   val comments: List<Comment>?
 )

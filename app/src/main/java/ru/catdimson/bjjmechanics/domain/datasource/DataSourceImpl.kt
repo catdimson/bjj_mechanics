@@ -7,7 +7,9 @@ import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
+import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 
 class DataSourceImpl(
     private val provider: RetrofitImpl
@@ -42,6 +44,10 @@ class DataSourceImpl(
 
     override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
         return provider.findTermById(id, authMap)
+    }
+
+    override suspend fun saveTermComment(commentDto: CommentDto, tokens: Map<String, String>): Response<Void> {
+        return provider.saveTermComment(commentDto, tokens)
     }
 
     // auth

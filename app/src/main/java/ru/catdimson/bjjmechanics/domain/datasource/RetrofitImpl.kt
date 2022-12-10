@@ -1,7 +1,6 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,6 +11,7 @@ import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 
 class RetrofitImpl : DataSource {
 
@@ -35,11 +35,17 @@ class RetrofitImpl : DataSource {
     }
 
     // sections
-    override suspend fun findSectionsByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+    override suspend fun findSectionsByTitle(
+        title: String,
+        authMap: Map<String, String>
+    ): List<SectionInfo> {
         return getService().findSectionsByTitle(title, authMap).await()
     }
 
-    override suspend fun findSectionsByCity(city: String, authMap: Map<String, String>): List<SectionInfo> {
+    override suspend fun findSectionsByCity(
+        city: String,
+        authMap: Map<String, String>
+    ): List<SectionInfo> {
         return getService().findSectionsByCity(city, authMap).await()
     }
 
@@ -62,6 +68,13 @@ class RetrofitImpl : DataSource {
 
     override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
         return getService().findTermById(authMap, id).await()
+    }
+
+    override suspend fun saveTermComment(
+        commentDto: CommentDto,
+        tokens: Map<String, String>
+    ): Response<Void> {
+        return getService().saveTermComment(commentDto, tokens).await()
     }
 
     // auth
