@@ -27,6 +27,8 @@ sealed class AppState {
 
     data class SuccessTermDetail(val data: Term?) : AppState()
 
+    data class SuccessTermDetailWithAccess(val data: Term?) : AppState()
+
     data class Error(val error: Throwable) : AppState()
 
     data class Loading(val progress: Int?) : AppState()

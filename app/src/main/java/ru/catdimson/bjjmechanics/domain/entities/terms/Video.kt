@@ -5,5 +5,5 @@ data class Video(
     val title: String,
     val description: String,
     val url: String,
-    val comments: List<Comment>
+    val comments: List<Comment>?
 )

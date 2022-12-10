@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_gray">#ff222222</color>
     <color name="blue_link">#196BB3</color>
+    <color name="warning_message">#FF5722</color>
 </resources>

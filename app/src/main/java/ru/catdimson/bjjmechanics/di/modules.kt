@@ -57,7 +57,14 @@ val termDetailsScreen = module {
     scope(named("termDetailsScope")) {
         scoped<TermsRepository> { TermsRepositoryImpl(dataSource = get()) }
         scoped<TermsInteractor> { TermsInteractorImpl(repository = get()) }
-        factory { TermDetailsViewModel(interactor = get()) }
+        scoped<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
+        scoped<AuthInteractor> { AuthInteractorImpl(repository = get()) }
+        factory { TermDetailsViewModel(
+            termsInteractor = get(),
+            authInteractor = get(),
+            authService = AuthorizationServiceImpl(),
+            application = get())
+        }
     }
 }
 
@@ -68,8 +75,8 @@ val authScreen = module {
         factory { AuthViewModel(
             interactor = get(),
             authService = AuthorizationServiceImpl(),
-            get()
-        ) }
+            application = get())
+        }
     }
 }
 
