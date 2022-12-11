@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import ru.catdimson.bjjmechanics.App
-import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
+import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData

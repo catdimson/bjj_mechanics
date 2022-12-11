@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
@@ -32,6 +33,15 @@ class RetrofitImpl : DataSource {
     companion object {
         private const val BASE_API_URL = "http://45.144.2.195:8080/"
         private const val DEBUG_API_URL = "http://10.0.2.2:8080/"
+    }
+
+    // actions
+    override suspend fun findActionById(id: Int): Action {
+        return getService().findActionById(id).await()
+    }
+
+    override suspend fun findActionsByPrevId(prevId: Int): List<Action> {
+        return getService().findActionsByPrevId(prevId).await()
     }
 
     // sections

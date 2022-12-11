@@ -8,14 +8,14 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
-import ru.catdimson.bjjmechanics.core.auth.AuthorizationService
-import ru.catdimson.bjjmechanics.core.auth.AuthorizationServiceImpl
+import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.core.validations.LoginValidation
 import ru.catdimson.bjjmechanics.core.validations.PasswordValidation
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
+import ru.catdimson.bjjmechanics.services.auth.AuthorizationServiceImpl
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
 

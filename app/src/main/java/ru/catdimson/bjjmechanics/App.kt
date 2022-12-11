@@ -14,6 +14,8 @@ class App : Application() {
             modules(
                 generals,
 
+                actionsScreen,
+
                 sectionsScreen,
                 sectionDetailsScreen,
 
