@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.core.auth
+package ru.catdimson.bjjmechanics.services.auth
 
 import android.content.Context
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse

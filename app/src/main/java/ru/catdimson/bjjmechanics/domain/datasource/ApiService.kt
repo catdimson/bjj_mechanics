@@ -3,6 +3,7 @@ package ru.catdimson.bjjmechanics.domain.datasource
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
+import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
@@ -13,6 +14,17 @@ import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 
 interface ApiService {
+
+    // Actions
+    @GET("actions/{id}")
+    fun findActionById(
+        @Path("id") id: Int
+    ): Deferred<Action>
+
+    @GET("actions")
+    fun findActionsByPrevId(
+        @Query("action_id_prev") prevId: Int
+    ): Deferred<List<Action>>
 
     // Sections
     @GET("sections")

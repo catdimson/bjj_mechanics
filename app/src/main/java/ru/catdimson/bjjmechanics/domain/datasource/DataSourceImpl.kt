@@ -1,13 +1,13 @@
 package ru.catdimson.bjjmechanics.domain.datasource
 
 import retrofit2.Response
+import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.sections.Coach
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
-import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 
@@ -15,12 +15,27 @@ class DataSourceImpl(
     private val provider: RetrofitImpl
 ) : DataSource {
 
+    // actions
+    override suspend fun findActionById(id: Int): Action {
+        return provider.findActionById(id)
+    }
+
+    override suspend fun findActionsByPrevId(prevId: Int): List<Action> {
+        return provider.findActionsByPrevId(prevId)
+    }
+
     // sections
-    override suspend fun findSectionsByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+    override suspend fun findSectionsByTitle(
+        title: String,
+        authMap: Map<String, String>
+    ): List<SectionInfo> {
         return provider.findSectionsByTitle(title, authMap)
     }
 
-    override suspend fun findSectionsByCity(city: String, authMap: Map<String, String>): List<SectionInfo> {
+    override suspend fun findSectionsByCity(
+        city: String,
+        authMap: Map<String, String>
+    ): List<SectionInfo> {
         return provider.findSectionsByCity(city, authMap)
     }
 
@@ -46,7 +61,10 @@ class DataSourceImpl(
         return provider.findTermById(id, authMap)
     }
 
-    override suspend fun saveTermComment(commentDto: CommentDto, tokens: Map<String, String>): Response<Void> {
+    override suspend fun saveTermComment(
+        commentDto: CommentDto,
+        tokens: Map<String, String>
+    ): Response<Void> {
         return provider.saveTermComment(commentDto, tokens)
     }
 

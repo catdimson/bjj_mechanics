@@ -32,7 +32,6 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
     )
     private val adapter by lazy { CommentAdapter() }
-    private var videoId = null
 
     companion object {
         @JvmStatic
