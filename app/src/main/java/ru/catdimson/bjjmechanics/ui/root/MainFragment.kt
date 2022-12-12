@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.databinding.FragmentMainBinding
 import ru.catdimson.bjjmechanics.ui.BaseFragment
+import ru.catdimson.bjjmechanics.ui.actions.ActionsFragment
 import ru.catdimson.bjjmechanics.ui.auth.AuthFragment
 import ru.catdimson.bjjmechanics.ui.sections.SectionsFragment
 import ru.catdimson.bjjmechanics.ui.terms.TermsFragment
@@ -28,7 +29,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
         if (savedInstanceState == null) {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.container, SectionsFragment.newInstance())
+                .replace(R.id.container, ActionsFragment.newInstance())
                 .commit()
         }
 
@@ -44,7 +45,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.menuBottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item_education -> {
-                    navigationTo(SectionsFragment.newInstance())
+                    navigationTo(ActionsFragment.newInstance())
                     true
                 }
                 R.id.menu_item_auth -> {

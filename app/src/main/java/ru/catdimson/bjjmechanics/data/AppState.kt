@@ -1,11 +1,14 @@
 package ru.catdimson.bjjmechanics.data
 
 import retrofit2.Response
+import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 sealed class AppState {
+
+    data class SuccessCurrentAction(val data: List<Action>) : AppState()
 
     data class SuccessLogoutState(val data: Boolean?) : AppState()
 
