@@ -19,7 +19,7 @@ class AuthInteractorImpl(
         return repository.token(jwtRefreshRequest)
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+    override fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
         return repository.refresh(jwtRefreshRequest)
     }
 

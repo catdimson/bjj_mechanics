@@ -30,11 +30,6 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         fun newInstance() = AuthFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        authService = AuthorizationServiceImpl()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,13 +43,11 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViewModel()
+        viewModel = scope.get()
+        authService = scope.get()
+
         initIncomingEvents()
         initOutgoingEvents()
-    }
-
-    private fun initViewModel() {
-        viewModel = scope.get()
     }
 
     private fun initIncomingEvents() {

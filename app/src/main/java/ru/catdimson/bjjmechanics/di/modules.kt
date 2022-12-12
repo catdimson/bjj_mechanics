@@ -33,6 +33,8 @@ import ru.catdimson.bjjmechanics.viewmodel.terms.TermsViewModel
 val generals = module {
     single<DataSource> { RetrofitImpl() }
     single<AuthorizationService> { AuthorizationServiceImpl() }
+    single<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
+    single<AuthInteractor> { AuthInteractorImpl(repository = get()) }
 }
 
 val actionsScreen = module {
@@ -77,13 +79,11 @@ val termDetailsScreen = module {
     scope(named("termDetailsScope")) {
         scoped<TermsRepository> { TermsRepositoryImpl(dataSource = get()) }
         scoped<TermsInteractor> { TermsInteractorImpl(repository = get()) }
-        scoped<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
-        scoped<AuthInteractor> { AuthInteractorImpl(repository = get()) }
         factory {
             TermDetailsViewModel(
                 termsInteractor = get(),
                 authInteractor = get(),
-                authService = AuthorizationServiceImpl(),
+                authService = get(),
                 application = get()
             )
         }
@@ -92,12 +92,10 @@ val termDetailsScreen = module {
 
 val authScreen = module {
     scope(named("authScope")) {
-        scoped<AuthRepository> { AuthRepositoryImpl(dataSource = get()) }
-        scoped<AuthInteractor> { AuthInteractorImpl(repository = get()) }
         factory {
             AuthViewModel(
                 interactor = get(),
-                authService = AuthorizationServiceImpl(),
+                authService = get(),
                 application = get()
             )
         }

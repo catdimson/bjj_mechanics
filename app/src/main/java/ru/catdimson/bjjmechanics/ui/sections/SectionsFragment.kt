@@ -66,6 +66,11 @@ class SectionsFragment : AbstractScreenFragment<FragmentSectionsBinding>(Fragmen
         initOutgoingEvents()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.killJobs()
+    }
+
     private fun initViewModel() {
         if (binding.sectionsRecyclerView.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")

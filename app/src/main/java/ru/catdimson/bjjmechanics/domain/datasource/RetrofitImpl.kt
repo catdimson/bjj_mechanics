@@ -96,8 +96,8 @@ class RetrofitImpl : DataSource {
         return getService().token(jwtRefreshRequest).await()
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return getService().refresh(jwtRefreshRequest).await()
+    override fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return getService().refresh(jwtRefreshRequest)
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {
