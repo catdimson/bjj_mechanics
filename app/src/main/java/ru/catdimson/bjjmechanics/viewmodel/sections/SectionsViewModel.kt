@@ -27,10 +27,6 @@ class SectionsViewModel(
         }
     }
 
-    fun killJobs() {
-        viewModelCoroutineScope.cancel()
-    }
-
     private suspend fun getSectionsByCity(city: String, authMap: Map<String, String>) {
         withContext(Dispatchers.Main) {
             liveData.postValue(AppState.SuccessSections(interactor.findByCity(city, authMap)))

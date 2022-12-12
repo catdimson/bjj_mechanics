@@ -39,17 +39,14 @@ class AuthViewModel(
 
     fun onLogoutState() {
         liveData.value = AppState.SuccessLogoutState(null)
+        cancelJob()
         viewModelCoroutineScope.launch {
             logoutState()
         }
     }
 
     fun onRegistrationStartState() {
-        liveData.value = AppState.Loading(null)
-        cancelJob()
-        viewModelCoroutineScope.launch {
-            registrationStartState()
-        }
+        liveData.postValue(AppState.SuccessRegistrationState(null))
     }
 
     fun onRegistration(regData: RegistrationData) {
@@ -78,7 +75,9 @@ class AuthViewModel(
     fun onRefreshToken(refreshToken: String) {
         liveData.value = AppState.Loading(null)
         cancelJob()
-        refresh(JwtRefreshRequest(refreshToken))
+        viewModelCoroutineScope.launch {
+            refresh(JwtRefreshRequest(refreshToken))
+        }
     }
 
     private suspend fun registration(regData: RegistrationData) {
@@ -119,11 +118,9 @@ class AuthViewModel(
         return null
     }
 
-    private fun refresh(jwtRefresh: JwtRefreshRequest) {
-        try {
+    private suspend fun refresh(jwtRefresh: JwtRefreshRequest) {
+        withContext(Dispatchers.IO) {
             liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh)))
-        } catch (e: Exception) {
-            liveData.postValue(AppState.SuccessAuthStartingState(true))
         }
     }
 
@@ -136,12 +133,6 @@ class AuthViewModel(
     private suspend fun authStartState() {
         withContext(Dispatchers.IO) {
             liveData.postValue(AppState.SuccessAuthStartingState(null))
-        }
-    }
-
-    private suspend fun registrationStartState() {
-        withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessRegistrationState(null))
         }
     }
 

@@ -77,7 +77,7 @@ class DataSourceImpl(
         return provider.token(jwtRefreshRequest)
     }
 
-    override fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
         return provider.refresh(jwtRefreshRequest)
     }
 

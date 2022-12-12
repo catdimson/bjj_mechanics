@@ -93,5 +93,5 @@ interface ApiService {
     @POST("auth/refresh")
     fun refresh(
         @Body jwtRefreshRequest: JwtRefreshRequest
-    ): JwtResponse
+    ): Deferred<JwtResponse>
 }

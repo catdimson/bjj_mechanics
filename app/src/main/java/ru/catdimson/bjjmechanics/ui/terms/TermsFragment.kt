@@ -124,6 +124,11 @@ class TermsFragment : AbstractScreenFragment<FragmentTermsBinding>(FragmentTerms
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.killJobs()
+    }
+
     private fun showViewWorking() {
         binding.loading.loadingFrameLayout.visibility = View.GONE
     }

@@ -71,6 +71,11 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         initLogoutEvents()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.killJobs()
+    }
+
     private fun initLoginEvents() {
         // обрабатываем нажатие кнопки "Не зарегистрированы?"
         binding.registrationLink.setOnClickListener {
@@ -220,7 +225,6 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
 
     private fun validatePassword(passwordField: TextInputLayout): Boolean {
         val passwordValidation = PasswordValidation(passwordField.editText?.text.toString())
-
 
         return if (!passwordValidation.isValid()) {
             passwordField.error =
