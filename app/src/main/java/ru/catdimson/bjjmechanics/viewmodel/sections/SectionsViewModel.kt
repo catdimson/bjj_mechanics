@@ -2,6 +2,7 @@ package ru.catdimson.bjjmechanics.viewmodel.sections
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.catdimson.bjjmechanics.data.AppState
@@ -26,8 +27,12 @@ class SectionsViewModel(
         }
     }
 
+    fun killJobs() {
+        viewModelCoroutineScope.cancel()
+    }
+
     private suspend fun getSectionsByCity(city: String, authMap: Map<String, String>) {
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Main) {
             liveData.postValue(AppState.SuccessSections(interactor.findByCity(city, authMap)))
         }
     }
