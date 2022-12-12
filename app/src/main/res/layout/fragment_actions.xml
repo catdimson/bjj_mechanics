@@ -72,6 +72,14 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintWidth_percent="0.5">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/current_action"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +90,16 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintWidth_percent="0.5">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/next_actions"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include android:id="@+id/loading" layout="@layout/loading_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

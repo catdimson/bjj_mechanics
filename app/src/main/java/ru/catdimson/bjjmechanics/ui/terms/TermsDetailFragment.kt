@@ -17,6 +17,7 @@ import ru.catdimson.bjjmechanics.domain.entities.user.User
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
+import ru.catdimson.bjjmechanics.utils.extractYoutubeId
 import ru.catdimson.bjjmechanics.viewmodel.terms.TermDetailsViewModel
 import java.time.LocalDate
 import java.util.*
@@ -172,18 +173,6 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
             })
         }
         binding.video.visibility = View.VISIBLE
-    }
-
-    private fun extractYoutubeId(ytUrl: String): String {
-        var vId: String? = null
-        val pattern = Pattern.compile(
-            "(?:https?:\\/\\/)?(?:www\\.)?youtu\\.?be(?:\\.com)?\\/?.*(?:watch|embed)?(?:.*v=|v\\/|\\/)([\\w\\-_]+)\\&?"
-        )
-        val matcher = pattern.matcher(ytUrl)
-        if (matcher.matches()) {
-            vId = matcher.group(1)
-        }
-        return vId!!
     }
 
     private fun showViewComments() {
