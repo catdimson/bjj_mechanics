@@ -18,7 +18,7 @@ class RetrofitImpl : DataSource {
 
     private val api by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(DEBUG_API_URL)
+            .baseUrl(BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
@@ -96,8 +96,8 @@ class RetrofitImpl : DataSource {
         return getService().token(jwtRefreshRequest).await()
     }
 
-    override fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return getService().refresh(jwtRefreshRequest)
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+        return getService().refresh(jwtRefreshRequest).await()
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {

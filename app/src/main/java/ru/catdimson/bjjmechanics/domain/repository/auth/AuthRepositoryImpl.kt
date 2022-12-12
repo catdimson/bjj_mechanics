@@ -19,7 +19,7 @@ class AuthRepositoryImpl(
         return dataSource.token(jwtRefreshRequest)
     }
 
-    override fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
         return dataSource.refresh(jwtRefreshRequest)
     }
 
