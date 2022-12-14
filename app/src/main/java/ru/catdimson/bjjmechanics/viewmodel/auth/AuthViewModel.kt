@@ -15,6 +15,7 @@ import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 import java.lang.RuntimeException
+import java.util.*
 
 class AuthViewModel(
     private val interactor: AuthInteractor,
@@ -72,11 +73,11 @@ class AuthViewModel(
         }
     }
 
-    fun onRefreshToken(refreshToken: String) {
+    fun onRefreshToken(accessToken: String, refreshToken: String) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            refresh(JwtRefreshRequest(refreshToken))
+            refresh(accessToken, JwtRefreshRequest(refreshToken))
         }
     }
 
@@ -118,9 +119,12 @@ class AuthViewModel(
         return null
     }
 
-    private suspend fun refresh(jwtRefresh: JwtRefreshRequest) {
+    private suspend fun refresh(accessToken: String, jwtRefresh: JwtRefreshRequest) {
+        val authorization = mapOf(
+            Pair("Authorization", "${"Bearer "} ${accessToken}")
+        )
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh)))
+            liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh, authorization)))
         }
     }
 

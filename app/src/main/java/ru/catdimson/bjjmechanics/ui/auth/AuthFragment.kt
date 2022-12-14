@@ -62,7 +62,7 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         if (accessToken == null || refreshToken == null) {
             viewModel.onAuthStartState()
         } else {
-            viewModel.onRefreshToken(refreshToken)
+            viewModel.onRefreshToken(accessToken, refreshToken)
             viewModel.onLogoutState()
         }
 

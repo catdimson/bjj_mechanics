@@ -13,8 +13,8 @@ class TermsRepositoryImpl(
         return dataSource.findAllTerms(authMap)
     }
 
-    override suspend fun findById(id: Int, authMap: Map<String, String>): Term {
-        return dataSource.findTermById(id, authMap)
+    override suspend fun findById(id: Int): Term {
+        return dataSource.findTermById(id)
     }
 
     override suspend fun saveTermComment(

@@ -12,7 +12,7 @@ interface TermsRepository : Repository {
 
     suspend fun findAll(authMap: Map<String, String>): List<Term>
 
-    suspend fun findById(id: Int, authMap: Map<String, String>): Term
+    suspend fun findById(id: Int): Term
 
     suspend fun saveTermComment(commentDto: CommentDto, tokens: Map<String, String>): Response<Void>
 
