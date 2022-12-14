@@ -18,7 +18,7 @@ class RetrofitImpl : DataSource {
 
     private val api by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_API_URL)
+            .baseUrl(DEBUG_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
@@ -76,8 +76,8 @@ class RetrofitImpl : DataSource {
         return getService().findAllTerms(authMap).await()
     }
 
-    override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
-        return getService().findTermById(authMap, id).await()
+    override suspend fun findTermById(id: Int): Term {
+        return getService().findTermById(id).await()
     }
 
     override suspend fun saveTermComment(
@@ -96,8 +96,8 @@ class RetrofitImpl : DataSource {
         return getService().token(jwtRefreshRequest).await()
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return getService().refresh(jwtRefreshRequest).await()
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+        return getService().refresh(jwtRefreshRequest, authorization).await()
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {

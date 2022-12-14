@@ -68,7 +68,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
     }
 
     private fun initOutgoingEvents(id: Int) {
-        viewModel.onShowTermById(id, authMap)
+        viewModel.onShowTermById(id)
 
         binding.commentBtnSend.setOnClickListener {
             val commentText = binding.commentField.text.toString()

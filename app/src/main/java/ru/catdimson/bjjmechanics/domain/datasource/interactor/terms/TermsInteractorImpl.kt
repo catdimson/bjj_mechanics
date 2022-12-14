@@ -13,8 +13,8 @@ class TermsInteractorImpl(
         return repository.findAll(authMap)
     }
 
-    override suspend fun findById(id: Int, authMap: Map<String, String>): Term {
-        return repository.findById(id, authMap)
+    override suspend fun findById(id: Int): Term {
+        return repository.findById(id)
     }
 
     override suspend fun saveTermComment(

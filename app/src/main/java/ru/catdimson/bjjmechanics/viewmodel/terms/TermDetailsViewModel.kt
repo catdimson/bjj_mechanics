@@ -27,36 +27,37 @@ class TermDetailsViewModel(
         return liveDataForViewToObserve
     }
 
-    fun onShowTermById(id: Int, authMap: Map<String, String>) {
+    fun onShowTermById(id: Int) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            getTermById(id, authMap)
+            getTermById(id)
         }
     }
 
-    private suspend fun getTermById(id: Int, authMap: Map<String, String>) {
+    private suspend fun getTermById(id: Int) {
         withContext(Dispatchers.IO) {
             if (isContainsTokens()) {
                 try {
+                    val authorization = mapOf(
+                        Pair("Authorization", "${"Bearer "} ${getAccessToken()}")
+                    )
                     val jwtResponse = authInteractor.refresh(
-                        JwtRefreshRequest(getRefreshToken()!!)
+                        JwtRefreshRequest(getRefreshToken()!!),
+                        authorization
                     )
                     authService.saveTokensToSharedPref(jwtResponse, getApplication())
                     liveData.postValue(
                         AppState.SuccessTermDetailWithAccess(
-                            termsInteractor.findById(
-                                id,
-                                authMap
-                            )
+                            termsInteractor.findById(id)
                         )
                     )
                 } catch (e: HttpException) {
                     authService.clearSharedPreferences(getApplication())
-                    liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id, authMap)))
+                    liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id)))
                 }
             } else {
-                liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id, authMap)))
+                liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id)))
             }
         }
     }
