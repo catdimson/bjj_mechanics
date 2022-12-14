@@ -57,15 +57,15 @@ class DataSourceImpl(
         return provider.findAllTerms(authMap)
     }
 
-    override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
-        return provider.findTermById(id, authMap)
+    override suspend fun findTermById(id: Int): Term {
+        return provider.findTermById(id)
     }
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return provider.saveTermComment(commentDto, tokens)
+        return provider.saveTermComment(commentDto, authorization)
     }
 
     // auth
@@ -77,8 +77,8 @@ class DataSourceImpl(
         return provider.token(jwtRefreshRequest)
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return provider.refresh(jwtRefreshRequest)
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+        return provider.refresh(jwtRefreshRequest, authorization)
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {

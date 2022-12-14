@@ -19,8 +19,8 @@ class AuthRepositoryImpl(
         return dataSource.token(jwtRefreshRequest)
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return dataSource.refresh(jwtRefreshRequest)
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+        return dataSource.refresh(jwtRefreshRequest, authorization)
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {

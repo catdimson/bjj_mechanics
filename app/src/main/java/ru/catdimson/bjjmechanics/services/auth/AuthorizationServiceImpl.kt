@@ -1,6 +1,7 @@
 package ru.catdimson.bjjmechanics.services.auth
 
 import android.content.Context
+import ru.catdimson.bjjmechanics.domain.entities.system.ShortUserInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 
 class AuthorizationServiceImpl : AuthorizationService {
@@ -10,6 +11,7 @@ class AuthorizationServiceImpl : AuthorizationService {
         private const val ACCESS_TOKEN = "TOKEN"
         private const val REFRESH_TOKEN = "REFRESH_TOKEN"
         private const val USER_ID = "USER_ID"
+        private const val USER_LOGIN = "USER_LOGIN"
     }
 
     override fun getAccessTokenFromSharedPref(context: Context): String? {
@@ -30,8 +32,9 @@ class AuthorizationServiceImpl : AuthorizationService {
         saveValueString(REFRESH_TOKEN, jwtResponse.refreshToken, context)
     }
 
-    override fun saveCurrentUserId(userId: Int, context: Context) {
-        saveValueInt(USER_ID, userId, context)
+    override fun saveCurrentUserInfo(userInfo: ShortUserInfo?, context: Context) {
+        saveValueInt(USER_ID, userInfo?.id!!, context)
+        saveValueString(USER_LOGIN, userInfo.login!!, context)
     }
 
     override fun clearSharedPreferences(context: Context) {
@@ -41,6 +44,17 @@ class AuthorizationServiceImpl : AuthorizationService {
 
     override fun getUserId(context: Context): Int? {
         return getValueInt(USER_ID, context)
+    }
+
+    override fun getUserLogin(context: Context): String? {
+        return getValueString(USER_LOGIN, context)
+    }
+
+    override fun getUserInfo(context: Context): ShortUserInfo {
+        return ShortUserInfo(
+            getUserId(context),
+            getUserLogin(context)
+        )
     }
 
     private fun getValueString(KEY: String, context: Context): String? {

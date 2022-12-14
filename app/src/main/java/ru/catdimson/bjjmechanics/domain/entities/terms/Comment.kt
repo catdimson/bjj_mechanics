@@ -6,6 +6,6 @@ data class Comment(
     val id: Int?,
     val text: String,
     val user: User,
-    val termId: Int
+    val term: Term
 //    val createDate: LocalDate
 )

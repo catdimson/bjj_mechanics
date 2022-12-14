@@ -30,12 +30,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
-x
+
         <androidx.constraintlayout.widget.Group
             android:id="@+id/login_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="login, password, btn_input, registration_link, screen_input_title" />
 
         <TextView
@@ -114,6 +114,7 @@ x
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
             android:textColor="@color/blue_link"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textSize="20dp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/left_border"

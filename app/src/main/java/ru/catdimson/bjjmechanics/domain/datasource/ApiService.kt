@@ -12,6 +12,7 @@ import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
+import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 
 interface ApiService {
 
@@ -64,14 +65,13 @@ interface ApiService {
 
     @GET("terms/{id}")
     fun findTermById(
-        @HeaderMap authMap: Map<String, String>,
         @Path("id") id: Int
     ): Deferred<Term>
 
-    @GET("terms/comments")
+    @POST("terms/comments")
     fun saveTermComment(
         @Body commentDto: CommentDto,
-        @HeaderMap tokens: Map<String, String>
+        @HeaderMap authorization: Map<String, String>
     ): Deferred<Response<Void>>
 
     // Auth
@@ -92,6 +92,7 @@ interface ApiService {
 
     @POST("auth/refresh")
     fun refresh(
-        @Body jwtRefreshRequest: JwtRefreshRequest
+        @Body jwtRefreshRequest: JwtRefreshRequest,
+        @HeaderMap authorization: Map<String, String>
     ): Deferred<JwtResponse>
 }

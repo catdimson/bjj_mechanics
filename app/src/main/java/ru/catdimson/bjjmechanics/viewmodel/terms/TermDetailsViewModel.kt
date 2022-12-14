@@ -11,7 +11,11 @@ import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractor
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
+import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
+import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.domain.entities.user.User
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
+import ru.catdimson.bjjmechanics.utils.extractIdFromHeaderLocation
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 
 class TermDetailsViewModel(
@@ -27,36 +31,37 @@ class TermDetailsViewModel(
         return liveDataForViewToObserve
     }
 
-    fun onShowTermById(id: Int, authMap: Map<String, String>) {
+    fun onShowTermById(id: Int) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            getTermById(id, authMap)
+            getTermById(id)
         }
     }
 
-    private suspend fun getTermById(id: Int, authMap: Map<String, String>) {
+    private suspend fun getTermById(id: Int) {
         withContext(Dispatchers.IO) {
             if (isContainsTokens()) {
                 try {
+                    val authorization = mapOf(
+                        Pair("Authorization", "${"Bearer "} ${getAccessToken()}")
+                    )
                     val jwtResponse = authInteractor.refresh(
-                        JwtRefreshRequest(getRefreshToken()!!)
+                        JwtRefreshRequest(getRefreshToken()!!),
+                        authorization
                     )
                     authService.saveTokensToSharedPref(jwtResponse, getApplication())
                     liveData.postValue(
                         AppState.SuccessTermDetailWithAccess(
-                            termsInteractor.findById(
-                                id,
-                                authMap
-                            )
+                            termsInteractor.findById(id)
                         )
                     )
                 } catch (e: HttpException) {
                     authService.clearSharedPreferences(getApplication())
-                    liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id, authMap)))
+                    liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id)))
                 }
             } else {
-                liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id, authMap)))
+                liveData.postValue(AppState.SuccessTermDetail(termsInteractor.findById(id)))
             }
         }
     }
@@ -71,14 +76,23 @@ class TermDetailsViewModel(
 
     private suspend fun saveComment(commentText: String, termId: Int) {
         withContext(Dispatchers.IO) {
-            val userId = authService.getUserId(getApplication())
-//            val authMap = mutableMapOf<String, String>().put(
-//                "Auth"
-//            )
-            if (userId != null) {
-                val commentDto = CommentDto(commentText, userId, termId)
-//                termsInteractor.saveTermComment(commentDto, authMap)
-//                liveData.postValue(AppState.SuccessTermDetailSendComment())
+            val user = authService.getUserInfo(getApplication())
+            val authorization = mapOf(
+                Pair("Authorization", "${"Bearer "} ${getAccessToken()}")
+            )
+            if (user.id != null) {
+                val user = User(user.id, user.login, null, null, null, null)
+                val term = Term(termId, null, null, null, null, null)
+                val commentDto = CommentDto(commentText, user, term)
+                val response = termsInteractor.saveTermComment(commentDto, authorization)
+                val commentId = extractIdFromHeaderLocation(response)
+                val comment = Comment(
+                    commentId,
+                    commentText,
+                    user,
+                    term
+                )
+                liveData.postValue(AppState.SuccessTermDetailSendComment(comment))
             } else {
                 liveData.postValue(AppState.Error(IllegalArgumentException("Что-то пошло не так")))
             }

@@ -12,7 +12,7 @@ interface AuthInteractor {
 
     suspend fun token(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
 
-    suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
+    suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse
 
     suspend fun registration(regData: RegistrationData): Response<Void>
 

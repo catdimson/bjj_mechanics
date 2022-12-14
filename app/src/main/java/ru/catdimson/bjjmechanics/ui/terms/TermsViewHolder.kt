@@ -20,7 +20,7 @@ class TermsViewHolder(
     fun bind(item: Term, onItemClickListener: TermsAdapter.OnListItemClickListener) {
         binding.apply {
             name.text = item.name
-            termType.text = item.termType.title
+            termType.text = item.termType?.title
             readMore.setOnClickListener {
                 onItemClickListener.onItemClick(item)
             }

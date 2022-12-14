@@ -13,8 +13,10 @@ import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteracto
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
+import ru.catdimson.bjjmechanics.utils.extractIdFromHeaderLocation
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 import java.lang.RuntimeException
+import java.util.*
 
 class AuthViewModel(
     private val interactor: AuthInteractor,
@@ -22,7 +24,6 @@ class AuthViewModel(
     application: Application
 ) : BaseAndroidViewModel<AppState>(application) {
 
-    private val patternUserId = """.*\/(?<userId>\d+)$""".toRegex()
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 
     fun subscribe(): LiveData<AppState> {
@@ -72,18 +73,18 @@ class AuthViewModel(
         }
     }
 
-    fun onRefreshToken(refreshToken: String) {
+    fun onRefreshToken(accessToken: String, refreshToken: String) {
         liveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch {
-            refresh(JwtRefreshRequest(refreshToken))
+            refresh(accessToken, JwtRefreshRequest(refreshToken))
         }
     }
 
     private suspend fun registration(regData: RegistrationData) {
         withContext(Dispatchers.IO) {
             val response = interactor.registration(regData)
-            val userId = extractUserId(response)
+            val userId = extractIdFromHeaderLocation(response)
             if (response.isSuccessful && userId != null) {
                 val jwtRequest = JwtRequest(
                     regData.login,
@@ -91,7 +92,7 @@ class AuthViewModel(
                 )
                 val jwtResponse = interactor.login(jwtRequest)
                 authService.saveTokensToSharedPref(jwtResponse, getApplication())
-                authService.saveCurrentUserId(userId, getApplication())
+                authService.saveCurrentUserInfo(jwtResponse.user, getApplication())
             } else {
                 liveData.postValue(AppState.Error(RuntimeException("Неизвестная ошибка. Попробуйте позже")))
             }
@@ -99,28 +100,12 @@ class AuthViewModel(
         }
     }
 
-    private fun extractUserId(response: Response<Void>): Int? {
-        val location = response.headers().get("Location")
-
-        if (location != null) {
-            val matcher = patternUserId.matchEntire(location)
-
-            if (matcher != null) {
-                val groups = matcher.groups as? MatchNamedGroupCollection
-
-                if (groups != null) {
-                    return groups["userId"]?.value?.toInt()
-                }
-                return null
-            }
-            return null
-        }
-        return null
-    }
-
-    private suspend fun refresh(jwtRefresh: JwtRefreshRequest) {
+    private suspend fun refresh(accessToken: String, jwtRefresh: JwtRefreshRequest) {
+        val authorization = mapOf(
+            Pair("Authorization", "${"Bearer "} ${accessToken}")
+        )
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh)))
+            liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh, authorization)))
         }
     }
 
@@ -143,6 +128,7 @@ class AuthViewModel(
         )
         val jwtResponse = interactor.login(jwtRequest)
         authService.saveTokensToSharedPref(jwtResponse, getApplication())
+        authService.saveCurrentUserInfo(jwtResponse.user, getApplication())
         liveData.postValue(AppState.SuccessLogoutState(null))
     }
 

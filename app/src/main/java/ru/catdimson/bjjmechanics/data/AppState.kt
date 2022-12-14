@@ -4,6 +4,7 @@ import retrofit2.Response
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
+import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 sealed class AppState {
@@ -30,7 +31,7 @@ sealed class AppState {
 
     data class SuccessTermDetail(val data: Term?) : AppState()
 
-    data class SuccessTermDetailSendComment(val data: Response<Void>) : AppState()
+    data class SuccessTermDetailSendComment(val data: Comment) : AppState()
 
     data class SuccessTermDetailWithAccess(val data: Term?) : AppState()
 

@@ -33,16 +33,16 @@ interface DataSource {
     // terms
     suspend fun findAllTerms(authMap: Map<String, String>): List<Term>
 
-    suspend fun findTermById(id: Int, authMap: Map<String, String>): Term
+    suspend fun findTermById(id: Int): Term
 
-    suspend fun saveTermComment(commentDto: CommentDto, tokens: Map<String, String>): Response<Void>
+    suspend fun saveTermComment(commentDto: CommentDto, authorization: Map<String, String>): Response<Void>
 
     // auth
     suspend fun login(jwtRequest: JwtRequest): JwtResponse
 
     suspend fun token(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
 
-    suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse
+    suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse
 
     suspend fun registration(regData: RegistrationData): Response<Void>
 

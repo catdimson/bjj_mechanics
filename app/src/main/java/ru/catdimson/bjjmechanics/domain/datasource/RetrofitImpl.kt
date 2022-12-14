@@ -76,15 +76,15 @@ class RetrofitImpl : DataSource {
         return getService().findAllTerms(authMap).await()
     }
 
-    override suspend fun findTermById(id: Int, authMap: Map<String, String>): Term {
-        return getService().findTermById(authMap, id).await()
+    override suspend fun findTermById(id: Int): Term {
+        return getService().findTermById(id).await()
     }
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return getService().saveTermComment(commentDto, tokens).await()
+        return getService().saveTermComment(commentDto, authorization).await()
     }
 
     // auth
@@ -96,8 +96,8 @@ class RetrofitImpl : DataSource {
         return getService().token(jwtRefreshRequest).await()
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
-        return getService().refresh(jwtRefreshRequest).await()
+    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+        return getService().refresh(jwtRefreshRequest, authorization).await()
     }
 
     override suspend fun registration(regData: RegistrationData): Response<Void> {

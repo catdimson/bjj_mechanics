@@ -68,7 +68,7 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
     }
 
     private fun initOutgoingEvents(id: Int) {
-        viewModel.onShowTermById(id, authMap)
+        viewModel.onShowTermById(id)
 
         binding.commentBtnSend.setOnClickListener {
             val commentText = binding.commentField.text.toString()
@@ -100,12 +100,9 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
             is AppState.SuccessTermDetailSendComment -> {
                 showViewWorking()
                 appState.data.let {
-                    if (it == null) {
-                        Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
-                    } else {
-                        showViewComments()
-//                        setDataToScreen(it)
-                    }
+                    showViewComments()
+                    addCommentToAdapter(it)
+                    clearCommentField()
                 }
             }
             is AppState.SuccessTermDetailWithAccess -> {
@@ -161,6 +158,10 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
         }
     }
 
+    private fun addCommentToAdapter(comment: Comment?) {
+        adapter.addData(comment!!)
+    }
+
     private fun showVideo(videoId: String) {
         with(binding) {
             lifecycle.addObserver(binding.video)
@@ -180,5 +181,9 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
             isNotAuthMessage.visibility = View.GONE
             commentWrapper.visibility = View.VISIBLE
         }
+    }
+
+    private fun clearCommentField() {
+        binding.commentField.text.clear()
     }
 }
