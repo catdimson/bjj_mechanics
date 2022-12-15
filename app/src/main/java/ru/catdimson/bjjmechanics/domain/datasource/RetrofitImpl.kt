@@ -18,7 +18,7 @@ class RetrofitImpl : DataSource {
 
     private val api by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(DEBUG_API_URL)
+            .baseUrl(BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
@@ -82,9 +82,9 @@ class RetrofitImpl : DataSource {
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return getService().saveTermComment(commentDto, tokens).await()
+        return getService().saveTermComment(commentDto, authorization).await()
     }
 
     // auth

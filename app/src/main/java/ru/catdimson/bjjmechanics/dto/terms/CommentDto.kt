@@ -1,17 +1,20 @@
 package ru.catdimson.bjjmechanics.dto.terms
 
+import ru.catdimson.bjjmechanics.domain.entities.terms.Term
+import ru.catdimson.bjjmechanics.domain.entities.user.User
+
 class CommentDto(
     text: String?,
-    userId: Int?,
-    termId: Int?
+    user: User?,
+    term: Term?
 ) {
     private val text: String?
-    private val userId: Int?
-    private val termId: Int?
+    private val user: User?
+    private val term: Term?
 
     init {
         this.text = text
-        this.userId = userId
-        this.termId = termId
+        this.user = user
+        this.term = term
     }
 }

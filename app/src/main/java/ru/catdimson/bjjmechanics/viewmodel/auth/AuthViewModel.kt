@@ -13,6 +13,7 @@ import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteracto
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
+import ru.catdimson.bjjmechanics.utils.extractIdFromHeaderLocation
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 import java.lang.RuntimeException
 import java.util.*
@@ -23,7 +24,6 @@ class AuthViewModel(
     application: Application
 ) : BaseAndroidViewModel<AppState>(application) {
 
-    private val patternUserId = """.*\/(?<userId>\d+)$""".toRegex()
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 
     fun subscribe(): LiveData<AppState> {
@@ -84,7 +84,7 @@ class AuthViewModel(
     private suspend fun registration(regData: RegistrationData) {
         withContext(Dispatchers.IO) {
             val response = interactor.registration(regData)
-            val userId = extractUserId(response)
+            val userId = extractIdFromHeaderLocation(response)
             if (response.isSuccessful && userId != null) {
                 val jwtRequest = JwtRequest(
                     regData.login,
@@ -92,31 +92,12 @@ class AuthViewModel(
                 )
                 val jwtResponse = interactor.login(jwtRequest)
                 authService.saveTokensToSharedPref(jwtResponse, getApplication())
-                authService.saveCurrentUserId(userId, getApplication())
+                authService.saveCurrentUserInfo(jwtResponse.user, getApplication())
             } else {
                 liveData.postValue(AppState.Error(RuntimeException("Неизвестная ошибка. Попробуйте позже")))
             }
             liveData.postValue(AppState.SuccessRegistration(response))
         }
-    }
-
-    private fun extractUserId(response: Response<Void>): Int? {
-        val location = response.headers().get("Location")
-
-        if (location != null) {
-            val matcher = patternUserId.matchEntire(location)
-
-            if (matcher != null) {
-                val groups = matcher.groups as? MatchNamedGroupCollection
-
-                if (groups != null) {
-                    return groups["userId"]?.value?.toInt()
-                }
-                return null
-            }
-            return null
-        }
-        return null
     }
 
     private suspend fun refresh(accessToken: String, jwtRefresh: JwtRefreshRequest) {
@@ -147,6 +128,7 @@ class AuthViewModel(
         )
         val jwtResponse = interactor.login(jwtRequest)
         authService.saveTokensToSharedPref(jwtResponse, getApplication())
+        authService.saveCurrentUserInfo(jwtResponse.user, getApplication())
         liveData.postValue(AppState.SuccessLogoutState(null))
     }
 

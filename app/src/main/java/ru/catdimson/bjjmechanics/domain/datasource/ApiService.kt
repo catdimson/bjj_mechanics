@@ -68,10 +68,10 @@ interface ApiService {
         @Path("id") id: Int
     ): Deferred<Term>
 
-    @GET("terms/comments")
+    @POST("terms/comments")
     fun saveTermComment(
         @Body commentDto: CommentDto,
-        @HeaderMap tokens: Map<String, String>
+        @HeaderMap authorization: Map<String, String>
     ): Deferred<Response<Void>>
 
     // Auth

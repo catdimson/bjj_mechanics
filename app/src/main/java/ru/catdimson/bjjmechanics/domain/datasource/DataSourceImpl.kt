@@ -63,9 +63,9 @@ class DataSourceImpl(
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return provider.saveTermComment(commentDto, tokens)
+        return provider.saveTermComment(commentDto, authorization)
     }
 
     // auth

@@ -19,9 +19,9 @@ class TermsInteractorImpl(
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return repository.saveTermComment(commentDto, tokens)
+        return repository.saveTermComment(commentDto, authorization)
     }
 
 }

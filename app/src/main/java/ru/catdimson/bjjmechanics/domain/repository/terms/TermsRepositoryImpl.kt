@@ -19,8 +19,8 @@ class TermsRepositoryImpl(
 
     override suspend fun saveTermComment(
         commentDto: CommentDto,
-        tokens: Map<String, String>
+        authorization: Map<String, String>
     ): Response<Void> {
-        return dataSource.saveTermComment(commentDto, tokens)
+        return dataSource.saveTermComment(commentDto, authorization)
     }
 }
