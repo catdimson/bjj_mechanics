@@ -7,6 +7,10 @@ class ActionsInteractorImpl(
     private val repository: ActionsRepository
 ) : ActionsInteractor {
 
+    override suspend fun findStartingAction(): List<Action> {
+        return repository.findStartingAction()
+    }
+
     override suspend fun findById(id: Int): Action {
         return repository.findById(id)
     }

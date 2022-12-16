@@ -14,6 +14,8 @@ import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 interface DataSource {
 
     // actions
+    suspend fun findStartingAction(): List<Action>
+
     suspend fun findActionById(id: Int): Action
 
     suspend fun findActionsByPrevId(prevId: Int): List<Action>

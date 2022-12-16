@@ -17,6 +17,9 @@ import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 interface ApiService {
 
     // Actions
+    @GET("actions")
+    fun findStartingAction(): Deferred<List<Action>>
+
     @GET("actions/{id}")
     fun findActionById(
         @Path("id") id: Int

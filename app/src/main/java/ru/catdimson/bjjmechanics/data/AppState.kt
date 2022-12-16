@@ -9,6 +9,8 @@ import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 
 sealed class AppState {
 
+    data class SuccessNextActions(val data: List<Action>) : AppState()
+
     data class SuccessCurrentAction(val data: List<Action>) : AppState()
 
     data class SuccessLogoutState(val data: Boolean?) : AppState()

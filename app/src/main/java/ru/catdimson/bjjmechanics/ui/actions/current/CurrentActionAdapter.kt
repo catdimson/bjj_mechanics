@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 
 class CurrentActionAdapter(
-    private val onListItemClickListener: OnListItemClickListener
+    private val onListItemClickListenerToPrev: OnListItemClickListener
 ) : RecyclerView.Adapter<CurrentActionViewHolder>() {
 
     private var data: List<Action> = arrayListOf()
@@ -20,7 +20,7 @@ class CurrentActionAdapter(
     }
 
     override fun onBindViewHolder(holder: CurrentActionViewHolder, position: Int) {
-        holder.bind(getItem(position), onListItemClickListener)
+        holder.bind(getItem(position), onListItemClickListenerToPrev)
     }
 
     override fun getItemCount(): Int {

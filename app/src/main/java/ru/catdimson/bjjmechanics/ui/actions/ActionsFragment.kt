@@ -15,6 +15,7 @@ import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionAdapter
+import ru.catdimson.bjjmechanics.ui.actions.next.NextActionAdapter
 import ru.catdimson.bjjmechanics.ui.terms.TermsAdapter
 import ru.catdimson.bjjmechanics.ui.terms.TermsDetailFragment
 import ru.catdimson.bjjmechanics.viewmodel.actions.ActionsViewModel
@@ -23,12 +24,24 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 
     private lateinit var viewModel: ActionsViewModel
     override var scope = getKoin().getOrCreateScope("actionsScope", named("actionsScope"))
-    private val adapterCurrentAction by lazy { CurrentActionAdapter(onListItemClickListener) }
+    private val adapterCurrentAction by lazy { CurrentActionAdapter(onListItemClickListenerToPrev) }
+    private val adapterNextActions by lazy { NextActionAdapter(onListItemClickListenerToNext) }
 
-    private val onListItemClickListener: CurrentActionAdapter.OnListItemClickListener =
+    private val onListItemClickListenerToPrev: CurrentActionAdapter.OnListItemClickListener =
         object : CurrentActionAdapter.OnListItemClickListener {
             override fun onItemClick(data: Action) {
                 Toast.makeText(context, "Кликнул на предыдущий приём", Toast.LENGTH_SHORT).show()
+//                parentFragmentManager.beginTransaction()
+//                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
+//                    .addToBackStack(null)
+//                    .commit()
+            }
+        }
+
+    private val onListItemClickListenerToNext: NextActionAdapter.OnListItemClickListener =
+        object : NextActionAdapter.OnListItemClickListener {
+            override fun onItemClick(data: Action) {
+                Toast.makeText(context, "Кликнул на следующий приём", Toast.LENGTH_SHORT).show()
 //                parentFragmentManager.beginTransaction()
 //                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
 //                    .addToBackStack(null)
@@ -43,6 +56,10 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 
     private fun setDataToAdapterCurrentAction(data: List<Action>) {
         adapterCurrentAction.setData(data)
+    }
+
+    private fun setDataToAdapterNextActions(data: List<Action>) {
+        adapterNextActions.setData(data)
     }
 
     override fun onCreateView(
@@ -72,7 +89,7 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
     }
 
     private fun initOutgoingEvents() {
-        viewModel.onShowCurrentAction()
+        viewModel.onShowActions()
     }
 
     private fun initIncomingEvents() {
@@ -83,6 +100,7 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 
     private fun initRecyclerParts() {
         binding.currentAction.adapter = adapterCurrentAction
+        binding.nextActions.adapter = adapterNextActions
     }
 
     override fun renderData(appState: AppState) {
@@ -94,6 +112,16 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
                         Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
                     } else {
                         setDataToAdapterCurrentAction(it)
+                    }
+                }
+            }
+            is AppState.SuccessNextActions -> {
+                showViewWorking()
+                appState.data.let {
+                    if (it.isEmpty()) {
+                        Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
+                    } else {
+                        setDataToAdapterNextActions(it)
                     }
                 }
             }

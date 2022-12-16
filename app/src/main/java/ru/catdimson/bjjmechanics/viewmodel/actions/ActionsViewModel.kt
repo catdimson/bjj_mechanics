@@ -7,7 +7,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.actions.ActionsInteractor
-import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.services.actions.ActionsService
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 
@@ -23,17 +22,19 @@ class ActionsViewModel(
         return liveDataForViewToObserve
     }
 
-    fun onShowCurrentAction() {
+    fun onShowActions() {
         liveData.value = AppState.Loading(null)
-        cancelJob()
         viewModelCoroutineScope.launch {
-            registration()
+            showActions()
         }
     }
 
-    private suspend fun registration(id: Int = 3) {
+    private suspend fun showActions() {
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessCurrentAction(listOf(interactor.findById(id))))
+            val startAction = interactor.findStartingAction()
+            liveData.postValue(AppState.SuccessCurrentAction(startAction))
+            val nextActions = interactor.findByPrevId(startAction[0].id)
+            liveData.postValue(AppState.SuccessNextActions(nextActions))
         }
     }
 
