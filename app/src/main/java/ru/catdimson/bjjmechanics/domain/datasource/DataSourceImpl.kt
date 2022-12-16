@@ -16,6 +16,10 @@ class DataSourceImpl(
 ) : DataSource {
 
     // actions
+    override suspend fun findStartingAction(): List<Action> {
+        return provider.findStartingAction()
+    }
+
     override suspend fun findActionById(id: Int): Action {
         return provider.findActionById(id)
     }

@@ -69,6 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingBottom="?actionBarSize"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintWidth_percent="0.5">
 
@@ -86,6 +87,7 @@
         android:id="@+id/right_section"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="?actionBarSize"
         app:layout_constraintLeft_toRightOf="@+id/left_section"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintWidth_percent="0.5">

@@ -7,6 +7,10 @@ class ActionsRepositoryImpl(
     private val dataSource: DataSource
 ) : ActionsRepository {
 
+    override suspend fun findStartingAction(): List<Action> {
+        return dataSource.findStartingAction()
+    }
+
     override suspend fun findById(id: Int): Action {
         return dataSource.findActionById(id)
     }
