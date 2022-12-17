@@ -9,6 +9,9 @@ data class Action(
     val actionType: ActionType,
     val video: Video,
 
+    var isStart: Boolean = false,
+    val isFinish: Boolean = false,
+
     val prevActions: List<Action>,
     val nextActions: List<Action>
 )

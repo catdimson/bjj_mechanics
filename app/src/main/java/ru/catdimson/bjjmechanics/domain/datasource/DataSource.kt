@@ -20,6 +20,8 @@ interface DataSource {
 
     suspend fun findActionsByPrevId(prevId: Int): List<Action>
 
+    suspend fun findActionsByNextId(nextId: Int): List<Action>
+
     // sections
     suspend fun findSectionsByTitle(title: String, authMap: Map<String, String>): List<SectionInfo>
 

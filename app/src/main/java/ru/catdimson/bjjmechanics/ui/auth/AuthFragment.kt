@@ -83,6 +83,11 @@ class AuthFragment : AbstractScreenFragment<FragmentAuthBinding>(FragmentAuthBin
         }
 
         // обрабатываем нажатие кнопки "Войти"
+        binding.loginLink.setOnClickListener {
+            viewModel.onAuthStartState()
+        }
+
+        // обрабатываем нажатие кнопки "Войти"
         binding.btnInput.setOnClickListener {
             if (validateLogin(binding.login) && validatePassword(binding.password)) {
                 viewModel.onLogin(

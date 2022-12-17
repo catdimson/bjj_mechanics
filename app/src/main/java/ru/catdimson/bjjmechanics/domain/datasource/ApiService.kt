@@ -30,6 +30,11 @@ interface ApiService {
         @Query("action_id_prev") prevId: Int
     ): Deferred<List<Action>>
 
+    @GET("actions")
+    fun findActionsByNextId(
+        @Query("action_id_next") nextId: Int
+    ): Deferred<List<Action>>
+
     // Sections
     @GET("sections")
     fun findSectionsByTitle(

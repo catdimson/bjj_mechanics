@@ -28,6 +28,10 @@ class DataSourceImpl(
         return provider.findActionsByPrevId(prevId)
     }
 
+    override suspend fun findActionsByNextId(nextId: Int): List<Action> {
+        return provider.findActionsByNextId(nextId)
+    }
+
     // sections
     override suspend fun findSectionsByTitle(
         title: String,

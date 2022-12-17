@@ -34,6 +34,7 @@ class CurrentActionViewHolder(
 //            showVideo(extractYoutubeId(item.video.url))
             currentActionImage.load("https://armlock.com/wp-content/uploads/2015/12/lodi-brazilian-jiu-jitsu.jpg")
             actionTitle.text = item.title
+            btnActionPrev.isEnabled = !item.isStart
             btnVideoDetails.setOnClickListener {
                 onListItemButtonClickListener.onVideoButtonClick(item.video.terms?.get(0)?.id)
             }
