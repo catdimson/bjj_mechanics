@@ -1,0 +1,99 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/success_terms_load_wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                tools:text="Кимура (Kimura)" />
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:autoPlay="false" />
+
+            <TextView
+                android:id="@+id/term_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="italic"
+                tools:text="Болевой приём" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Описание приема. Описание приема. Описание приема.
+Описание приема. Описание приема. Описание приема. Описание приема. Описание приема. Описание приема. " />
+
+            <TextView
+                android:id="@+id/is_not_auth_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/is_not_alive_send_comment_message"
+                android:textAlignment="center"
+                android:textColor="@color/warning_message" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/comment_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/comment_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Комментарий"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/comment_btn_send"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/comment_btn_send"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="➤"
+                    android:textSize="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/loading_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

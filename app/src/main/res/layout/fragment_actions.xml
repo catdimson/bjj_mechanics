@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/actions_wrap"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Обучалка"
+            android:textAlignment="center"
+            android:textSize="28dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/left_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Текущее положение/приём"
+            android:textAlignment="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <TextView
+            android:id="@+id/right_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Возможные приёмы"
+            android:textAlignment="center"
+            app:layout_constraintLeft_toRightOf="@+id/left_subtitle"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintWidth_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/delimiter"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#BEC3C1"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/center_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/left_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="?actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintWidth_percent="0.5">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/current_action"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/right_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="?actionBarSize"
+        app:layout_constraintLeft_toRightOf="@+id/left_section"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintWidth_percent="0.5">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/next_actions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/loading_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

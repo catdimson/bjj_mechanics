@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/section_preview"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_zal_edinoborstv" />
+
+    <LinearLayout
+        android:id="@+id/section_info"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/section_preview"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:text="Marine BJJ" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="г.Иваново, ул.Жестянщиков, д.13" />
+
+        <TextView
+            android:id="@+id/contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="89102223311" />
+
+        <TextView
+            android:id="@+id/short_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Краткое описание секции. Краткое описание секции. Краткое описание секции" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
