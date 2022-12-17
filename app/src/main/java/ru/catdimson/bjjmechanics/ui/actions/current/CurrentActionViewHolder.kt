@@ -11,6 +11,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import ru.catdimson.bjjmechanics.databinding.ItemActionCurrentBinding
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
+import ru.catdimson.bjjmechanics.ui.actions.OnListItemButtonClickListener
 import ru.catdimson.bjjmechanics.utils.extractYoutubeId
 
 class CurrentActionViewHolder(
@@ -26,11 +27,16 @@ class CurrentActionViewHolder(
         }
     }
 
-    fun bind(item: Action, onItemClickListener: CurrentActionAdapter.OnListItemClickListener) {
+    fun bind(item: Action,
+             onItemClickListener: CurrentActionAdapter.OnListItemClickListener,
+             onListItemButtonClickListener: OnListItemButtonClickListener) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
             currentActionImage.load("https://armlock.com/wp-content/uploads/2015/12/lodi-brazilian-jiu-jitsu.jpg")
             actionTitle.text = item.title
+            btnVideoDetails.setOnClickListener {
+                onListItemButtonClickListener.onVideoButtonClick(item.video.terms?.get(0)?.id)
+            }
             btnReadDetails.setOnClickListener {
                 actionDescription.isVisible = !actionDescription.isVisible
             }

@@ -3,9 +3,11 @@ package ru.catdimson.bjjmechanics.ui.actions.current
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
+import ru.catdimson.bjjmechanics.ui.actions.OnListItemButtonClickListener
 
 class CurrentActionAdapter(
-    private val onListItemClickListenerToPrev: OnListItemClickListener
+    private val onListItemClickListenerToPrev: OnListItemClickListener,
+    private val onListItemButtonClickListener: OnListItemButtonClickListener
 ) : RecyclerView.Adapter<CurrentActionViewHolder>() {
 
     private var data: List<Action> = arrayListOf()
@@ -20,7 +22,7 @@ class CurrentActionAdapter(
     }
 
     override fun onBindViewHolder(holder: CurrentActionViewHolder, position: Int) {
-        holder.bind(getItem(position), onListItemClickListenerToPrev)
+        holder.bind(getItem(position), onListItemClickListenerToPrev, onListItemButtonClickListener)
     }
 
     override fun getItemCount(): Int {
