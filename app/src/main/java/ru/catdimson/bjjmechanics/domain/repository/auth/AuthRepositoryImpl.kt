@@ -12,14 +12,17 @@ class AuthRepositoryImpl(
 ) : AuthRepository {
 
     override suspend fun login(jwtRequest: JwtRequest): JwtResponse {
-       return dataSource.login(jwtRequest)
+        return dataSource.login(jwtRequest)
     }
 
     override suspend fun token(jwtRefreshRequest: JwtRefreshRequest): JwtResponse {
         return dataSource.token(jwtRefreshRequest)
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+    override suspend fun refresh(
+        jwtRefreshRequest: JwtRefreshRequest,
+        authorization: Map<String, String>
+    ): JwtResponse {
         return dataSource.refresh(jwtRefreshRequest, authorization)
     }
 

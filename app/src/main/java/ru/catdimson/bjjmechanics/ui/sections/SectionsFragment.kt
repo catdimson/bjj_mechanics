@@ -11,21 +11,21 @@ import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentSectionsBinding
 import ru.catdimson.bjjmechanics.domain.entities.sections.SectionInfo
-import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
-import ru.catdimson.bjjmechanics.ui.BaseFragment
-import ru.catdimson.bjjmechanics.ui.terms.TermsAdapter
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
-import ru.catdimson.bjjmechanics.viewmodel.terms.TermsViewModel
 import java.util.*
 
-class SectionsFragment : AbstractScreenFragment<FragmentSectionsBinding>(FragmentSectionsBinding::inflate) {
+class SectionsFragment :
+    AbstractScreenFragment<FragmentSectionsBinding>(FragmentSectionsBinding::inflate) {
 
     private lateinit var viewModel: SectionsViewModel
     override var scope = getKoin().getOrCreateScope("sectionsScope", named("sectionsScope"))
     private val adapter by lazy { SectionsAdapter(onListItemClickListener) }
     private val authMap = mapOf(
-        Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
+        Pair(
+            "Authorization",
+            "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}"
+        )
     )
 
     private val onListItemClickListener: SectionsAdapter.OnListItemClickListener =

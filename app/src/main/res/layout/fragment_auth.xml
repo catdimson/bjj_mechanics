@@ -43,16 +43,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:paddingBottom="16dp"
             android:text="@string/input"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
-            app:layout_constraintBottom_toTopOf="@id/login"
             android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@id/login"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:paddingBottom="16dp"
             tools:text="Вход" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -61,10 +61,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/login"
             app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/password"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/screen_input_title"
-            app:layout_constraintBottom_toTopOf="@+id/password"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -81,9 +81,9 @@
             android:hint="@string/password"
             android:paddingTop="8dp"
             app:endIconMode="password_toggle"
+            app:layout_constraintBottom_toTopOf="@+id/btn_input"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
-            app:layout_constraintBottom_toTopOf="@+id/btn_input"
             app:layout_constraintTop_toBottomOf="@+id/login"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
@@ -101,8 +101,8 @@
             android:layout_marginTop="2dp"
             android:text="@string/btn_input"
             android:textSize="18dp"
-            app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintBottom_toTopOf="@+id/registration_link"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -110,12 +110,12 @@
             android:id="@+id/registration_link"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/not_registration"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
             android:textColor="@color/blue_link"
-            android:foreground="?android:attr/selectableItemBackground"
             android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
             app:layout_constraintLeft_toLeftOf="@+id/left_border"
             app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/btn_input" />
@@ -133,16 +133,16 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:paddingBottom="16dp"
             android:text="@string/registration"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
-            app:layout_constraintBottom_toTopOf="@id/registration_login"
             android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@id/registration_login"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:paddingBottom="16dp"
             tools:text="Регистрация" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -151,10 +151,10 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:layout_height="wrap_content"
             android:hint="@string/login"
             app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@id/registration_password"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/screen_registration_title"
-            app:layout_constraintBottom_toTopOf="@id/registration_password"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -170,10 +170,10 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:hint="@string/password"
             android:paddingTop="8dp"
             app:endIconMode="password_toggle"
+            app:layout_constraintBottom_toTopOf="@id/registration_name"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/registration_login"
-            app:layout_constraintBottom_toTopOf="@id/registration_name"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -190,10 +190,10 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:hint="@string/name"
             android:paddingTop="8dp"
             app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@id/registration_phone"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/registration_password"
-            app:layout_constraintBottom_toTopOf="@id/registration_phone"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -211,10 +211,10 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:hint="@string/phone"
             android:paddingTop="8dp"
             app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/btn_registration"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/registration_name"
-            app:layout_constraintBottom_toTopOf="@+id/btn_registration"
             app:startIconDrawable="@drawable/ic_space_mars_photo_alien">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -231,19 +231,19 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:layout_marginTop="2dp"
             android:text="@string/btn_registration"
             android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/login_link"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
-            app:layout_constraintBottom_toTopOf="@+id/login_link"
             app:layout_constraintTop_toBottomOf="@+id/registration_phone" />
 
         <TextView
             android:id="@+id/login_link"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="Войти"
             android:textAlignment="center"
             android:textColor="@color/blue_link"
-            android:foreground="?android:attr/selectableItemBackground"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
             app:layout_constraintLeft_toLeftOf="@+id/left_border"
@@ -262,27 +262,27 @@ registration_phone, registration_name, screen_registration_title, login_link" />
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:paddingBottom="16dp"
             android:text="@string/output"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
-            app:layout_constraintBottom_toTopOf="@id/btn_logout"
             android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_logout"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:paddingBottom="16dp"
             tools:text="Выход" />
 
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
             android:layout_marginTop="2dp"
             android:text="@string/btn_logout"
-            app:layout_constraintLeft_toLeftOf="@id/left_border"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
+            app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/screen_logout_title" />
 

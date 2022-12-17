@@ -8,7 +8,7 @@ class SectionsAdapter(
     private val onListItemClickListener: OnListItemClickListener
 ) : RecyclerView.Adapter<SectionsViewHolder>() {
 
-    private var data : List<SectionInfo> = arrayListOf()
+    private var data: List<SectionInfo> = arrayListOf()
 
     fun setData(data: List<SectionInfo>) {
         this.data = data
@@ -27,7 +27,7 @@ class SectionsAdapter(
         return data.size
     }
 
-    private fun getItem(position: Int) : SectionInfo = data[position]
+    private fun getItem(position: Int): SectionInfo = data[position]
 
     interface OnListItemClickListener {
         fun onItemClick(data: SectionInfo)

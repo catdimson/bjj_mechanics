@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.services.actions
+package ru.catdimson.bjjmechanics.domain.services.actions
 
 import android.content.Context
 import com.google.gson.Gson

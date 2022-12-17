@@ -6,7 +6,7 @@ import androidx.viewbinding.ViewBinding
 import org.koin.core.scope.Scope
 import ru.catdimson.bjjmechanics.data.AppState
 
-abstract class AbstractScreenFragment<T : ViewBinding> (
+abstract class AbstractScreenFragment<T : ViewBinding>(
     inflate: (inflater: LayoutInflater, parent: ViewGroup?, attachToRoot: Boolean) -> T
 ) : BaseFragment<T>(inflate) {
 

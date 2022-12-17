@@ -85,7 +85,10 @@ class DataSourceImpl(
         return provider.token(jwtRefreshRequest)
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+    override suspend fun refresh(
+        jwtRefreshRequest: JwtRefreshRequest,
+        authorization: Map<String, String>
+    ): JwtResponse {
         return provider.refresh(jwtRefreshRequest, authorization)
     }
 

@@ -1,7 +1,6 @@
 package ru.catdimson.bjjmechanics.viewmodel.actions
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,7 +9,7 @@ import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.actions.ActionsInteractor
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.domain.entities.actions.chain.ActionsStack
-import ru.catdimson.bjjmechanics.services.actions.ActionsService
+import ru.catdimson.bjjmechanics.domain.services.actions.ActionsService
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
 
 class ActionsViewModel(
