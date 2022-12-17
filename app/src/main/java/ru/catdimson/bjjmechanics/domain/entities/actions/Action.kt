@@ -8,6 +8,7 @@ data class Action(
     val description: String,
     val actionType: ActionType,
     val video: Video,
+    val imageUrl: String?,
 
     var isStart: Boolean = false,
     val isFinish: Boolean = false,

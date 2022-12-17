@@ -29,7 +29,11 @@ class NextActionViewHolder(
     ) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
-            nextActionImage.load("https://i.ytimg.com/vi/OCt9qux--vo/maxresdefault.jpg")
+            if (item.imageUrl == null) {
+                nextActionImage.load("https://i.ytimg.com/vi/OCt9qux--vo/maxresdefault.jpg")
+            } else {
+                nextActionImage.load(item.imageUrl)
+            }
             actionTitle.text = item.title
             btnVideoDetails.setOnClickListener {
                 onListItemButtonClickListener.onVideoButtonClick(item.video.terms?.get(0)?.id)

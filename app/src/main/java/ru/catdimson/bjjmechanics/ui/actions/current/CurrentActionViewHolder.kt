@@ -29,7 +29,11 @@ class CurrentActionViewHolder(
     ) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
-            currentActionImage.load("https://armlock.com/wp-content/uploads/2015/12/lodi-brazilian-jiu-jitsu.jpg")
+            if (item.imageUrl == null) {
+                currentActionImage.load("https://armlock.com/wp-content/uploads/2015/12/lodi-brazilian-jiu-jitsu.jpg")
+            } else {
+                currentActionImage.load(item.imageUrl)
+            }
             actionTitle.text = item.title
             btnActionPrev.isEnabled = !item.isStart
             btnVideoDetails.setOnClickListener {
