@@ -8,6 +8,7 @@ class AuthorizationServiceImpl : AuthorizationService {
 
     companion object {
         private const val AUTH_DATAS = "AUTH_DATAS"
+
         private const val ACCESS_TOKEN = "TOKEN"
         private const val REFRESH_TOKEN = "REFRESH_TOKEN"
         private const val USER_ID = "USER_ID"

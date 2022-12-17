@@ -1,18 +1,13 @@
 package ru.catdimson.bjjmechanics.ui.actions.current
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import ru.catdimson.bjjmechanics.databinding.ItemActionCurrentBinding
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.ui.actions.OnListItemButtonClickListener
-import ru.catdimson.bjjmechanics.utils.extractYoutubeId
 
 class CurrentActionViewHolder(
     private val binding: ItemActionCurrentBinding
@@ -27,9 +22,11 @@ class CurrentActionViewHolder(
         }
     }
 
-    fun bind(item: Action,
-             onItemClickListener: CurrentActionAdapter.OnListItemClickListener,
-             onListItemButtonClickListener: OnListItemButtonClickListener) {
+    fun bind(
+        item: Action,
+        onItemClickListener: CurrentActionAdapter.OnListItemClickListener,
+        onListItemButtonClickListener: OnListItemButtonClickListener
+    ) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
             currentActionImage.load("https://armlock.com/wp-content/uploads/2015/12/lodi-brazilian-jiu-jitsu.jpg")

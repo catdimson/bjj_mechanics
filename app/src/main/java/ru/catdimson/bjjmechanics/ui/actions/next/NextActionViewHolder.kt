@@ -1,21 +1,13 @@
 package ru.catdimson.bjjmechanics.ui.actions.next
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import ru.catdimson.bjjmechanics.databinding.ItemActionCurrentBinding
 import ru.catdimson.bjjmechanics.databinding.ItemActionNextBinding
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
 import ru.catdimson.bjjmechanics.ui.actions.OnListItemButtonClickListener
-import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionAdapter
-import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionViewHolder
-import ru.catdimson.bjjmechanics.utils.extractYoutubeId
 
 class NextActionViewHolder(
     private val binding: ItemActionNextBinding
@@ -30,9 +22,10 @@ class NextActionViewHolder(
         }
     }
 
-    fun bind(item: Action,
-             onItemClickListener: NextActionAdapter.OnListItemClickListener,
-             onListItemButtonClickListener: OnListItemButtonClickListener
+    fun bind(
+        item: Action,
+        onItemClickListener: NextActionAdapter.OnListItemClickListener,
+        onListItemButtonClickListener: OnListItemButtonClickListener
     ) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
