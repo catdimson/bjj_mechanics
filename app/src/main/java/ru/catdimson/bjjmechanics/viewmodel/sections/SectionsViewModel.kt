@@ -2,7 +2,6 @@ package ru.catdimson.bjjmechanics.viewmodel.sections
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.catdimson.bjjmechanics.data.AppState
@@ -11,7 +10,7 @@ import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
 
 class SectionsViewModel(
     private val interactor: SectionsInteractor
-): BaseViewModel<AppState>() {
+) : BaseViewModel<AppState>() {
 
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 

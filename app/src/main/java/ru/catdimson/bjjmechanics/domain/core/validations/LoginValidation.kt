@@ -1,4 +1,4 @@
-package ru.catdimson.bjjmechanics.core.validations
+package ru.catdimson.bjjmechanics.domain.core.validations
 
 class LoginValidation(
     private val loginValue: String

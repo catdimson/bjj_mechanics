@@ -12,7 +12,6 @@ import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtResponse
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
-import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 
 interface ApiService {
 

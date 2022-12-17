@@ -8,7 +8,7 @@ class TermsAdapter(
     private val onListItemClickListener: OnListItemClickListener
 ) : RecyclerView.Adapter<TermsViewHolder>() {
 
-    private var data : List<Term> = arrayListOf()
+    private var data: List<Term> = arrayListOf()
 
     fun setData(data: List<Term>) {
         this.data = data
@@ -27,7 +27,7 @@ class TermsAdapter(
         return data.size
     }
 
-    private fun getItem(position: Int) : Term = data[position]
+    private fun getItem(position: Int): Term = data[position]
 
     interface OnListItemClickListener {
         fun onItemClick(data: Term)

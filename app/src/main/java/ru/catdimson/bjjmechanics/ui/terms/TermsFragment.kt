@@ -5,18 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
-import ru.catdimson.bjjmechanics.App
 import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentTermsBinding
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
-import ru.catdimson.bjjmechanics.ui.BaseFragment
-import ru.catdimson.bjjmechanics.ui.sections.SectionsAdapter
-import ru.catdimson.bjjmechanics.viewmodel.sections.SectionsViewModel
 import ru.catdimson.bjjmechanics.viewmodel.terms.TermsViewModel
 import java.util.*
 
@@ -27,7 +22,10 @@ class TermsFragment : AbstractScreenFragment<FragmentTermsBinding>(FragmentTerms
     override var scope = getKoin().getOrCreateScope("termsScope", named("termsScope"))
     private val adapter by lazy { TermsAdapter(onListItemClickListener) }
     private val authMap = mapOf(
-        Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
+        Pair(
+            "Authorization",
+            "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}"
+        )
     )
 
     private val onListItemClickListener: TermsAdapter.OnListItemClickListener =

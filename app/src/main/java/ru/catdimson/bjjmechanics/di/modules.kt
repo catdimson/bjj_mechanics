@@ -20,9 +20,9 @@ import ru.catdimson.bjjmechanics.domain.repository.sections.SectionsRepository
 import ru.catdimson.bjjmechanics.domain.repository.sections.SectionsRepositoryImpl
 import ru.catdimson.bjjmechanics.domain.repository.terms.TermsRepository
 import ru.catdimson.bjjmechanics.domain.repository.terms.TermsRepositoryImpl
-import ru.catdimson.bjjmechanics.services.actions.ActionsServiceImpl
-import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
-import ru.catdimson.bjjmechanics.services.auth.AuthorizationServiceImpl
+import ru.catdimson.bjjmechanics.domain.services.actions.ActionsServiceImpl
+import ru.catdimson.bjjmechanics.domain.services.auth.AuthorizationService
+import ru.catdimson.bjjmechanics.domain.services.auth.AuthorizationServiceImpl
 import ru.catdimson.bjjmechanics.viewmodel.actions.ActionsViewModel
 import ru.catdimson.bjjmechanics.viewmodel.auth.AuthViewModel
 import ru.catdimson.bjjmechanics.viewmodel.sections.SectionDetailsViewModel

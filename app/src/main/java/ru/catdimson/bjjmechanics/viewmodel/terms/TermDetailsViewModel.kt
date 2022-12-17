@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.terms.TermsInteractor
@@ -14,6 +13,7 @@ import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.domain.entities.user.User
+import ru.catdimson.bjjmechanics.domain.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.dto.terms.CommentDto
 import ru.catdimson.bjjmechanics.utils.extractIdFromHeaderLocation
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel

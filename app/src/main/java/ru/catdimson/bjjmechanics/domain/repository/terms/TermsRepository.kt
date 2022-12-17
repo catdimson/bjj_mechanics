@@ -14,6 +14,9 @@ interface TermsRepository : Repository {
 
     suspend fun findById(id: Int): Term
 
-    suspend fun saveTermComment(commentDto: CommentDto, authorization: Map<String, String>): Response<Void>
+    suspend fun saveTermComment(
+        commentDto: CommentDto,
+        authorization: Map<String, String>
+    ): Response<Void>
 
 }

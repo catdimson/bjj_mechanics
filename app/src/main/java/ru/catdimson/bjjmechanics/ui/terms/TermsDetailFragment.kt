@@ -11,26 +11,25 @@ import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentTermsDetailBinding
-import ru.catdimson.bjjmechanics.domain.entities.user.Person
-import ru.catdimson.bjjmechanics.domain.entities.user.Role
-import ru.catdimson.bjjmechanics.domain.entities.user.User
 import ru.catdimson.bjjmechanics.domain.entities.terms.Comment
 import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.utils.extractYoutubeId
 import ru.catdimson.bjjmechanics.viewmodel.terms.TermDetailsViewModel
-import java.time.LocalDate
 import java.util.*
-import java.util.regex.Pattern
 
 const val TERM_DETAIL_ID = "TERM_DETAIL_ID"
 
-class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(FragmentTermsDetailBinding::inflate) {
+class TermsDetailFragment :
+    AbstractScreenFragment<FragmentTermsDetailBinding>(FragmentTermsDetailBinding::inflate) {
 
     private lateinit var viewModel: TermDetailsViewModel
     override var scope = getKoin().getOrCreateScope("termDetailsScope", named("termDetailsScope"))
     private val authMap = mapOf(
-        Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
+        Pair(
+            "Authorization",
+            "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}"
+        )
     )
     private val adapter by lazy { CommentAdapter() }
 

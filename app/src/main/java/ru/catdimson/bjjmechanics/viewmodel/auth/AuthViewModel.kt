@@ -5,18 +5,15 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import ru.catdimson.bjjmechanics.App
-import ru.catdimson.bjjmechanics.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.domain.datasource.interactor.auth.AuthInteractor
 import ru.catdimson.bjjmechanics.domain.entities.system.RegistrationData
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRefreshRequest
 import ru.catdimson.bjjmechanics.domain.entities.system.token.JwtRequest
+import ru.catdimson.bjjmechanics.domain.services.auth.AuthorizationService
 import ru.catdimson.bjjmechanics.utils.extractIdFromHeaderLocation
 import ru.catdimson.bjjmechanics.viewmodel.BaseAndroidViewModel
-import java.lang.RuntimeException
-import java.util.*
 
 class AuthViewModel(
     private val interactor: AuthInteractor,
@@ -105,7 +102,14 @@ class AuthViewModel(
             Pair("Authorization", "${"Bearer "} ${accessToken}")
         )
         withContext(Dispatchers.IO) {
-            liveData.postValue(AppState.SuccessRefreshToken(interactor.refresh(jwtRefresh, authorization)))
+            liveData.postValue(
+                AppState.SuccessRefreshToken(
+                    interactor.refresh(
+                        jwtRefresh,
+                        authorization
+                    )
+                )
+            )
         }
     }
 

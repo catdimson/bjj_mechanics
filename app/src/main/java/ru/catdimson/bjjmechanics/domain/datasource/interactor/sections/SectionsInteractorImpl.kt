@@ -7,7 +7,10 @@ class SectionsInteractorImpl(
     private val repository: SectionsRepository
 ) : SectionsInteractor {
 
-    override suspend fun findByTitle(title: String, authMap: Map<String, String>): List<SectionInfo> {
+    override suspend fun findByTitle(
+        title: String,
+        authMap: Map<String, String>
+    ): List<SectionInfo> {
         return repository.findByTitle(title, authMap)
     }
 

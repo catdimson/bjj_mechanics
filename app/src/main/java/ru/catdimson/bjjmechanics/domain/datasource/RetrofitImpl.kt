@@ -104,7 +104,10 @@ class RetrofitImpl : DataSource {
         return getService().token(jwtRefreshRequest).await()
     }
 
-    override suspend fun refresh(jwtRefreshRequest: JwtRefreshRequest, authorization: Map<String, String>): JwtResponse {
+    override suspend fun refresh(
+        jwtRefreshRequest: JwtRefreshRequest,
+        authorization: Map<String, String>
+    ): JwtResponse {
         return getService().refresh(jwtRefreshRequest, authorization).await()
     }
 

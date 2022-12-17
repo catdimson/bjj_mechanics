@@ -20,12 +20,17 @@ import java.util.*
 
 const val SECTION_DETAIL_ID = "SECTION_DETAIL_ID"
 
-class SectionsDetailFragment : AbstractScreenFragment<FragmentSectionsDetailBinding>(FragmentSectionsDetailBinding::inflate) {
+class SectionsDetailFragment :
+    AbstractScreenFragment<FragmentSectionsDetailBinding>(FragmentSectionsDetailBinding::inflate) {
 
     private lateinit var viewModel: SectionDetailsViewModel
-    override var scope = getKoin().getOrCreateScope("sectionDetailsScope", named("sectionDetailsScope"))
+    override var scope =
+        getKoin().getOrCreateScope("sectionDetailsScope", named("sectionDetailsScope"))
     private val authMap = mapOf(
-        Pair("Authorization", "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}")
+        Pair(
+            "Authorization",
+            "${"Basic"} ${Base64.getEncoder().encodeToString("user:password".toByteArray())}"
+        )
     )
     private val adapter by lazy { CoachesAdapter() }
 

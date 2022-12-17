@@ -33,6 +33,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include android:id="@+id/loading" layout="@layout/loading_layout" />
+    <include
+        android:id="@+id/loading"
+        layout="@layout/loading_layout" />
 
 </FrameLayout>

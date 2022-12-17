@@ -10,7 +10,7 @@ import ru.catdimson.bjjmechanics.viewmodel.BaseViewModel
 
 class SectionDetailsViewModel(
     private val interactor: SectionsInteractor
-): BaseViewModel<AppState>() {
+) : BaseViewModel<AppState>() {
 
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
 
