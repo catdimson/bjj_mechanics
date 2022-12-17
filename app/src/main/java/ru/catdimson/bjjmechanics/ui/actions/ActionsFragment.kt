@@ -10,42 +10,44 @@ import org.koin.core.qualifier.named
 import ru.catdimson.bjjmechanics.R
 import ru.catdimson.bjjmechanics.data.AppState
 import ru.catdimson.bjjmechanics.databinding.FragmentActionsBinding
-import ru.catdimson.bjjmechanics.databinding.FragmentAuthBinding
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
-import ru.catdimson.bjjmechanics.domain.entities.terms.Term
 import ru.catdimson.bjjmechanics.ui.AbstractScreenFragment
 import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionAdapter
 import ru.catdimson.bjjmechanics.ui.actions.next.NextActionAdapter
-import ru.catdimson.bjjmechanics.ui.terms.TermsAdapter
 import ru.catdimson.bjjmechanics.ui.terms.TermsDetailFragment
 import ru.catdimson.bjjmechanics.viewmodel.actions.ActionsViewModel
 
-class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentActionsBinding::inflate) {
+const val IS_RESET = "IS_RESET"
+
+class ActionsFragment :
+    AbstractScreenFragment<FragmentActionsBinding>(FragmentActionsBinding::inflate) {
 
     private lateinit var viewModel: ActionsViewModel
     override var scope = getKoin().getOrCreateScope("actionsScope", named("actionsScope"))
-    private val adapterCurrentAction by lazy { CurrentActionAdapter(onListItemClickListenerToPrev, onListItemButtonClickListener) }
-    private val adapterNextActions by lazy { NextActionAdapter(onListItemClickListenerToNext, onListItemButtonClickListener) }
+    private val adapterCurrentAction by lazy {
+        CurrentActionAdapter(
+            onListItemClickListenerToPrev,
+            onListItemButtonClickListener
+        )
+    }
+    private val adapterNextActions by lazy {
+        NextActionAdapter(
+            onListItemClickListenerToNext,
+            onListItemButtonClickListener
+        )
+    }
 
     private val onListItemClickListenerToPrev: CurrentActionAdapter.OnListItemClickListener =
         object : CurrentActionAdapter.OnListItemClickListener {
             override fun onItemClick(data: Action) {
-                Toast.makeText(context, "Кликнул на предыдущий приём", Toast.LENGTH_SHORT).show()
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
-//                    .addToBackStack(null)
-//                    .commit()
+                viewModel.onPrevAction()
             }
         }
 
     private val onListItemClickListenerToNext: NextActionAdapter.OnListItemClickListener =
         object : NextActionAdapter.OnListItemClickListener {
             override fun onItemClick(data: Action) {
-                Toast.makeText(context, "Кликнул на следующий приём", Toast.LENGTH_SHORT).show()
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
-//                    .addToBackStack(null)
-//                    .commit()
+                viewModel.onNextAction(data)
             }
         }
 
@@ -62,7 +64,13 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 
     companion object {
         @JvmStatic
-        fun newInstance() = ActionsFragment()
+        fun newInstance(isReset: Boolean): ActionsFragment {
+            val args = Bundle()
+            args.putBoolean(IS_RESET, isReset)
+            val fragment = ActionsFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
     private fun setDataToAdapterCurrentAction(data: List<Action>) {
@@ -87,9 +95,11 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
         super.onViewCreated(view, savedInstanceState)
 
         initViewModel()
+        initStartSettings(arguments?.get(IS_RESET) as Boolean)
         initRecyclerParts()
         initIncomingEvents()
         initOutgoingEvents()
+
     }
 
     private fun initViewModel() {
@@ -97,6 +107,12 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
             throw IllegalStateException("The ViewModel should be initialised first")
         }
         viewModel = scope.get()
+    }
+
+    private fun initStartSettings(isReset: Boolean) {
+        if (isReset) {
+            viewModel.onReset()
+        }
     }
 
     private fun initOutgoingEvents() {
@@ -123,6 +139,14 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
                         Toast.makeText(context, "Данных нет, сорян", Toast.LENGTH_LONG).show()
                     } else {
                         setDataToAdapterCurrentAction(it)
+                    }
+                }
+            }
+            is AppState.SuccessActionsFinish -> {
+                showViewWorking()
+                appState.data.let {
+                    if (it) {
+                        setDataToAdapterNextActions(mutableListOf())
                     }
                 }
             }

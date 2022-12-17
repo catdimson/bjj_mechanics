@@ -29,7 +29,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
         if (savedInstanceState == null) {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.container, ActionsFragment.newInstance())
+                .replace(R.id.container, ActionsFragment.newInstance(false))
                 .commit()
         }
 
@@ -45,7 +45,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.menuBottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item_education -> {
-                    navigationTo(ActionsFragment.newInstance())
+                    navigationTo(ActionsFragment.newInstance(false))
                     true
                 }
                 R.id.menu_item_auth -> {
