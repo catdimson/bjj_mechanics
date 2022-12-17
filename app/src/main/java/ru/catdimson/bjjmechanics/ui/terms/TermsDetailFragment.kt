@@ -148,7 +148,11 @@ class TermsDetailFragment : AbstractScreenFragment<FragmentTermsDetailBinding>(F
     }
 
     private fun setDataToScreen(term: Term?) {
-        showVideo(extractYoutubeId(term?.video?.url!!))
+        if (term?.video?.url != null) {
+            showVideo(extractYoutubeId(term.video.url))
+        } else {
+            showVideo(extractYoutubeId("https://www.youtube.com/watch?v=ulLMInzk9bc"))
+        }
         adapter.setData(term?.comments)
         binding.apply {
             name.text = term?.name

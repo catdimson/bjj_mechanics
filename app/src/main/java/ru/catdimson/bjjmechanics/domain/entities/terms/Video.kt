@@ -4,5 +4,6 @@ data class Video(
     val id: Int,
     val title: String,
     val description: String,
-    val url: String
+    val url: String,
+    val terms: List<Term>?
 )

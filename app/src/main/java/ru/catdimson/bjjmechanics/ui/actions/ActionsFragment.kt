@@ -24,8 +24,8 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 
     private lateinit var viewModel: ActionsViewModel
     override var scope = getKoin().getOrCreateScope("actionsScope", named("actionsScope"))
-    private val adapterCurrentAction by lazy { CurrentActionAdapter(onListItemClickListenerToPrev) }
-    private val adapterNextActions by lazy { NextActionAdapter(onListItemClickListenerToNext) }
+    private val adapterCurrentAction by lazy { CurrentActionAdapter(onListItemClickListenerToPrev, onListItemButtonClickListener) }
+    private val adapterNextActions by lazy { NextActionAdapter(onListItemClickListenerToNext, onListItemButtonClickListener) }
 
     private val onListItemClickListenerToPrev: CurrentActionAdapter.OnListItemClickListener =
         object : CurrentActionAdapter.OnListItemClickListener {
@@ -46,6 +46,17 @@ class ActionsFragment : AbstractScreenFragment<FragmentActionsBinding>(FragmentA
 //                    .replace(R.id.container, TermsDetailFragment.newInstance(data.id))
 //                    .addToBackStack(null)
 //                    .commit()
+            }
+        }
+
+    private val onListItemButtonClickListener: OnListItemButtonClickListener =
+        object : OnListItemButtonClickListener {
+            override fun onVideoButtonClick(termId: Int?) {
+                val id = termId ?: 1
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, TermsDetailFragment.newInstance(id))
+                    .addToBackStack(null)
+                    .commit()
             }
         }
 

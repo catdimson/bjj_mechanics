@@ -12,6 +12,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import ru.catdimson.bjjmechanics.databinding.ItemActionCurrentBinding
 import ru.catdimson.bjjmechanics.databinding.ItemActionNextBinding
 import ru.catdimson.bjjmechanics.domain.entities.actions.Action
+import ru.catdimson.bjjmechanics.ui.actions.OnListItemButtonClickListener
 import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionAdapter
 import ru.catdimson.bjjmechanics.ui.actions.current.CurrentActionViewHolder
 import ru.catdimson.bjjmechanics.utils.extractYoutubeId
@@ -29,11 +30,17 @@ class NextActionViewHolder(
         }
     }
 
-    fun bind(item: Action, onItemClickListener: NextActionAdapter.OnListItemClickListener) {
+    fun bind(item: Action,
+             onItemClickListener: NextActionAdapter.OnListItemClickListener,
+             onListItemButtonClickListener: OnListItemButtonClickListener
+    ) {
         binding.apply {
 //            showVideo(extractYoutubeId(item.video.url))
             nextActionImage.load("https://i.ytimg.com/vi/OCt9qux--vo/maxresdefault.jpg")
             actionTitle.text = item.title
+            btnVideoDetails.setOnClickListener {
+                onListItemButtonClickListener.onVideoButtonClick(item.video.terms?.get(0)?.id)
+            }
             btnReadDetails.setOnClickListener {
                 actionDescription.isVisible = !actionDescription.isVisible
             }
