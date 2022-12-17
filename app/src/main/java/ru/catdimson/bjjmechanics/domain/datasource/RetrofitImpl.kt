@@ -48,6 +48,10 @@ class RetrofitImpl : DataSource {
         return getService().findActionsByPrevId(prevId).await()
     }
 
+    override suspend fun findActionsByNextId(nextId: Int): List<Action> {
+        return getService().findActionsByNextId(nextId).await()
+    }
+
     // sections
     override suspend fun findSectionsByTitle(
         title: String,

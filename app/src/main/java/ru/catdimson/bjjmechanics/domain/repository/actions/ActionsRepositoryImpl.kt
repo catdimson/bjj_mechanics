@@ -18,4 +18,8 @@ class ActionsRepositoryImpl(
     override suspend fun findByPrevId(prevId: Int): List<Action> {
         return dataSource.findActionsByPrevId(prevId)
     }
+
+    override suspend fun findByNextId(nextId: Int): List<Action> {
+        return dataSource.findActionsByNextId(nextId)
+    }
 }

@@ -116,7 +116,6 @@
             android:textColor="@color/blue_link"
             android:foreground="?android:attr/selectableItemBackground"
             android:textSize="20dp"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/left_border"
             app:layout_constraintRight_toRightOf="@+id/right_border"
             app:layout_constraintTop_toBottomOf="@+id/btn_input" />
@@ -127,7 +126,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:constraint_referenced_ids="registration_login, registration_password, btn_registration,
-registration_phone, registration_name, screen_registration_title" />
+registration_phone, registration_name, screen_registration_title, login_link" />
 
         <TextView
             android:id="@+id/screen_registration_title"
@@ -234,8 +233,22 @@ registration_phone, registration_name, screen_registration_title" />
             android:textSize="18dp"
             app:layout_constraintLeft_toLeftOf="@id/left_border"
             app:layout_constraintRight_toRightOf="@id/right_border"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
+            app:layout_constraintBottom_toTopOf="@+id/login_link"
             app:layout_constraintTop_toBottomOf="@+id/registration_phone" />
+
+        <TextView
+            android:id="@+id/login_link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            android:textAlignment="center"
+            android:textColor="@color/blue_link"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_border"
+            app:layout_constraintLeft_toLeftOf="@+id/left_border"
+            app:layout_constraintRight_toRightOf="@+id/right_border"
+            app:layout_constraintTop_toBottomOf="@+id/btn_registration" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/logout_group"

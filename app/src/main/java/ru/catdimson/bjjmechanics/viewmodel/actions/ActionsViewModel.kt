@@ -24,6 +24,7 @@ class ActionsViewModel(
 
     fun onShowActions() {
         liveData.value = AppState.Loading(null)
+        cancelJob()
         viewModelCoroutineScope.launch {
             showActions()
         }
@@ -32,6 +33,8 @@ class ActionsViewModel(
     private suspend fun showActions() {
         withContext(Dispatchers.IO) {
             val startAction = interactor.findStartingAction()
+            val prevActions = interactor.findByNextId(startAction[0].id)
+            startAction[0].isStart = prevActions.isEmpty()
             liveData.postValue(AppState.SuccessCurrentAction(startAction))
             val nextActions = interactor.findByPrevId(startAction[0].id)
             liveData.postValue(AppState.SuccessNextActions(nextActions))

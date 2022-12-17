@@ -19,4 +19,8 @@ class ActionsInteractorImpl(
         return repository.findByPrevId(prevId)
     }
 
+    override suspend fun findByNextId(nextId: Int): List<Action> {
+        return repository.findByNextId(nextId)
+    }
+
 }

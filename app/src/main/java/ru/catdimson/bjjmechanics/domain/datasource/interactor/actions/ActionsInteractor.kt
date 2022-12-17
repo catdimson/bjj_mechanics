@@ -10,4 +10,6 @@ interface ActionsInteractor {
 
     suspend fun findByPrevId(prevId: Int): List<Action>
 
+    suspend fun findByNextId(nextId: Int): List<Action>
+
 }
